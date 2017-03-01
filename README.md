@@ -22,6 +22,7 @@ WordPress Themes
 ## 版本信息
 * 主题名称：JieStyle Two
 * 主题作者：唐杰
+* 作者博客：[http://tangjie.me](http://tangjie.me)
 * 首发时间：2016-11-20
 * 最新版本：V2.0
 * 最后更新：2017-03-01
