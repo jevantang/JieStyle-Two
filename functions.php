@@ -133,7 +133,7 @@ $author = get_comment_author();
 if ( empty( $url ) || 'http://' == $url )
 $return = $author;
 else
-$return = "<a href='http://tangjie.me/go.php?url=$url' rel='nofollow' target='_blank'>$author</a>";
+$return = "<a href='$url' rel='nofollow' target='_blank'>$author</a>";
 return $return;
 }
 add_filter('get_comment_author_link', 'remove_comment_links');
