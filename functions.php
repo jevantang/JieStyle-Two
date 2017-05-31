@@ -303,7 +303,7 @@ function mytheme_admin() {
 <div class="wrap">
   <h2><b><?php echo $themename; ?>主题设置</b></h2>
   <hr />
-  <div>主题作者：<a href="https://tangjie.me" target="_blank">唐杰</a> ¦ 当前版本：<a href="https://tangjie.me/jiestyle" title="JieStyle V2.0" target="_blank">V2.0</a> ¦ 主题介绍、使用帮助及升级请访问：<a href="https://tangjie.me/jiestyle" title="JieStyle" target="_blank">https://tangjie.me/JieStyle</a></div>
+  <div>主题作者：<a href="https://tangjie.me" target="_blank">唐杰</a> ¦ 当前版本：<a href="https://tangjie.me/jiestyle" target="_blank">V2.1</a> ¦ 主题介绍、使用帮助及升级请访问：<a href="https://tangjie.me/jiestyle" target="_blank">https://tangjie.me/JieStyle</a></div>
   <form method="post">
     <div class="options">
       <?php foreach ($options as $value) {if ($value['type'] == "text") { ?>
