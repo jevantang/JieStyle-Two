@@ -31,7 +31,7 @@ add_filter( 'pre_option_link_manager_enabled', '__return_true' );
 
 //替换Gravatar服务器
 function kratos_get_avatar( $avatar ) {
-$avatar = preg_replace( "/http:\/\/(www|\d).gravatar.com/","http://cn.gravatar.com",$avatar );
+$avatar = preg_replace( "/http:\/\/(www|\d).gravatar.com/","https://cn.gravatar.com",$avatar );
 return $avatar;
 }
 add_filter( 'get_avatar', 'kratos_get_avatar' );
@@ -234,7 +234,7 @@ $options = array (
 	array("name" => "新浪微博地址",
     "id" => $shortname."_weibo_url",
     "type" => "text",
-    "std" => "http://weibo.com/782622",
+    "std" => "https://weibo.com/782622",
 	"explain" => "请输入您的新浪微博地址"
 	),
 	array("name" => "是否显示Twitter",
@@ -303,7 +303,7 @@ function mytheme_admin() {
 <div class="wrap">
   <h2><b><?php echo $themename; ?>主题设置</b></h2>
   <hr />
-  <div>主题作者：<a href="http://tangjie.me" target="_blank">唐杰</a> ¦ 当前版本：<a href="http://tangjie.me/jiestyle" title="JieStyle V2.0" target="_blank">V2.0</a> ¦ 主题介绍、使用帮助及升级请访问：<a href="http://tangjie.me/jiestyle" title="JieStyle" target="_blank">http://tangjie.me/JieStyle</a></div>
+  <div>主题作者：<a href="https://tangjie.me" target="_blank">唐杰</a> ¦ 当前版本：<a href="https://tangjie.me/jiestyle" title="JieStyle V2.0" target="_blank">V2.0</a> ¦ 主题介绍、使用帮助及升级请访问：<a href="https://tangjie.me/jiestyle" title="JieStyle" target="_blank">https://tangjie.me/JieStyle</a></div>
   <form method="post">
     <div class="options">
       <?php foreach ($options as $value) {if ($value['type'] == "text") { ?>

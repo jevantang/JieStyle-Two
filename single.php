@@ -60,7 +60,7 @@
         <h4 class="modal-title" id="myModalLabel"><i class="fa fa-cny" aria-hidden="true"></i> 打赏支持</h4>
       </div>
       <div class="modal-body text-center">
-        <p><img border="0" src="http://tangjie.me/media/AliPay.png" alt="唐杰支付宝" width="180" height="180" style="margin: 0 8%;"><img border="0" src="http://tangjie.me/media/WeixinPay.png" alt="唐杰微信钱包" width="180" height="180" style="margin: 0 8%;"></p>
+        <p><img border="0" src="https://tangjie.me/media/AliPay.png" alt="唐杰支付宝" width="180" height="180" style="margin: 0 8%;"><img border="0" src="https://tangjie.me/media/WeixinPay.png" alt="唐杰微信钱包" width="180" height="180" style="margin: 0 8%;"></p>
         <p>扫描二维码，输入您要打赏的金额</p>
       </div>
     </div>

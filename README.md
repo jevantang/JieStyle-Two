@@ -2,9 +2,9 @@
 
 WordPress Themes
 
-![TangStyle](http://tangjie.me/media/themes/JieStyle-Two.jpg)
+![TangStyle](https://tangjie.me/media/themes/JieStyle-Two.jpg)
 
-主题演示：[http://tangjie.me](http://tangjie.me)
+主题演示：[https://tangjie.me](https://tangjie.me)
 
 ## 主题介绍
 * 极简风格，全新JieStyle第二代轻柔风格
@@ -22,7 +22,7 @@ WordPress Themes
 ## 版本信息
 * 主题名称：JieStyle Two
 * 主题作者：唐杰
-* 作者博客：[http://tangjie.me](http://tangjie.me)
+* 作者博客：[https://tangjie.me](https://tangjie.me)
 * 首发时间：2016-11-20
 * 最新版本：V2.0
 * 最后更新：2017-03-01
@@ -42,5 +42,5 @@ WordPress Themes
 * 本主题可以自由分享传播，但请署名及注明出处。
 * 本主题免费下载，不限个人或商业使用，但请使用中保留作者版权。
 * 如果愿意，请给作者博客一个友情链接，谢谢。
-    *  链接名称： [产品经理](http://tangjie.me)
-    *  链接地址： [http://tangjie.me](http://tangjie.me)
+    *  链接名称： [产品经理](https://tangjie.me)
+    *  链接地址： [https://tangjie.me](https://tangjie.me)
