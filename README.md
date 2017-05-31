@@ -24,7 +24,7 @@ WordPress Themes
 * 主题作者：唐杰
 * 作者博客：[https://tangjie.me](https://tangjie.me)
 * 首发时间：2016-11-20
-* 最新版本：V2.0
+* 最新版本：V2.1
 * 最后更新：2017-05-31
 
 ## 主题配置
