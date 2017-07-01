@@ -11,7 +11,7 @@
       <span><?php edit_post_link('<i class="fa fa-pencil-square-o" aria-hidden="true"></i> 编辑'); ?></span>
     </div>
     <div class="view-content">
-      <?php the_content(); ?>
+<?php the_content(); ?>
     </div>
     <section class="view-tag">
       <div class="pull-left"><i class="fa fa-tags"></i> <?php the_tags('',''); ?></div>
