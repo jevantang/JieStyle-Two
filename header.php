@@ -76,7 +76,7 @@ wp_head();
 <body>
 <header id="header">
   <div class="avatar"><img src="<?php bloginfo('template_directory'); ?>/images/avatar.jpg" alt="<?php bloginfo('name'); ?>" class="img-circle" width="50%"></div>
-  <h3 id="name"><?php bloginfo('name'); ?></h3>
+  <h1 id="name"><?php bloginfo('name'); ?></h1>
   <div class="sns">
     <a href="<?php bloginfo('rss2_url'); ?>" target="_blank" rel="nofollow" title="RSS"><i class="fa fa-rss" aria-hidden="true"></i></a>
     <?php if (get_option('tang_weibo') == '显示') { ?>
@@ -109,4 +109,11 @@ wp_head();
    'walker'          => '',)
    ); ?>
   </div>
+  <?php if (get_option('tang_weixin') == '显示') { ?>
+  <div class="weixin">
+    <img src="<?php echo stripslashes(get_option('tang_weixin_img')); ?>" alt="微信公众号" width="50%">
+    <p>微信公众号</p>
+  </div>
+  <?php { echo ''; } ?>
+  <?php } else { } ?>
 </header>
