@@ -265,6 +265,24 @@ $options = array (
 	"css" => "class='h80px'",
 	"explain" => "页面底部可以显示第三方统计<br>您可以放一个或者多个统计代码"
 	),
+	array("name" => "头像",
+    "id" => $shortname."_avatar",
+    "type" => "text",
+    "std" => "https://tangjie.me/wp-content/themes/JieStyle-Two/images/avatar.jpg",
+	"explain" => "头像图片链接"
+	),
+	array("name" => "是否显示微信公众号",
+    "id" => $shortname."_weixin",
+    "type" => "select",
+    "std" => "隐藏",
+    "options" => array("隐藏", "显示")
+	),
+	array("name" => "微信公众号图片",
+    "id" => $shortname."_weixin_img",
+    "type" => "text",
+    "std" => "https://tangjie.me/media/weixin.jpg",
+	  "explain" => "请输入您的二维码图片链接"
+	),
 	array("name" => "是否显示新浪微博",
     "id" => $shortname."_weibo",
     "type" => "select",
@@ -301,17 +319,29 @@ $options = array (
     "std" => "https://www.facebook.com/jietangok",
 	  "explain" => "请输入您的Facebook地址"
 	),
-	array("name" => "是否显示微信公众号",
-    "id" => $shortname."_weixin",
+	array("name" => "打赏-是否启用（文章页）",
+    "id" => $shortname."_dashang",
     "type" => "select",
-    "std" => "隐藏",
-    "options" => array("隐藏", "显示")
+    "std" => "禁用",
+    "options" => array("禁用", "启用")
 	),
-	array("name" => "微信公众号图片",
-    "id" => $shortname."_weixin_img",
+	array("name" => "打赏-描述",
+    "id" => $shortname."_dashang_info",
     "type" => "text",
-    "std" => "https://tangjie.me/media/weixin.jpg",
-	  "explain" => "请输入您的二维码图片链接"
+    "std" => "如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作！",
+	  "explain" => "想对读者说的话"
+	),
+	array("name" => "打赏-支付宝",
+    "id" => $shortname."_dashang_alipay",
+    "type" => "text",
+    "std" => "https://tangjie.me/media/AliPay.png",
+	  "explain" => "支付宝二维码图片链接"
+	),
+	array("name" => "打赏-微信",
+    "id" => $shortname."_dashang_wechat",
+    "type" => "text",
+    "std" => "https://tangjie.me/media/WeixinPay.png",
+	  "explain" => "微信收款二维码图片链接"
 	),
 );
 function mytheme_add_admin() {

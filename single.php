@@ -16,10 +16,13 @@
     <section class="view-tag">
       <div class="pull-left"><i class="fa fa-tags"></i> <?php the_tags('',''); ?></div>
     </section>
+    <?php if (get_option('tang_facebook') == '启用') { ?>
     <section class="support-author">
-      <p>如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作！</p>
+      <p><?php echo stripslashes(get_option('tang_dashang_info')); ?></p>
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal"><i class="fa fa-cny" aria-hidden="true"></i> 打赏支持</button>
     </section>
+    <?php { echo ''; } ?>
+    <?php } else { } ?>
     <section id="comments">
       <?php comments_template(); ?>
     </section>
@@ -60,7 +63,7 @@
         <h4 class="modal-title" id="myModalLabel"><i class="fa fa-cny" aria-hidden="true"></i> 打赏支持</h4>
       </div>
       <div class="modal-body text-center">
-        <p><img border="0" src="https://tangjie.me/media/AliPay.png" alt="唐杰支付宝" width="180" height="180" style="margin: 0 8%;"><img border="0" src="https://tangjie.me/media/WeixinPay.png" alt="唐杰微信钱包" width="180" height="180" style="margin: 0 8%;"></p>
+        <p><img border="0" src="<?php echo stripslashes(get_option('tang_dashang_alipay')); ?>" style="margin:0 8%;max-width:180px;max-height:180px;"><img border="0" src="<?php echo stripslashes(get_option('tang_dashang_wechat')); ?>" style="margin:0 8%;max-width:180px;max-height:180px;"></p>
         <p>扫描二维码，输入您要打赏的金额</p>
       </div>
     </div>
