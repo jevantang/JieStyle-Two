@@ -16,7 +16,7 @@
     <section class="view-tag">
       <div class="pull-left"><i class="fa fa-tags"></i> <?php the_tags('',''); ?></div>
     </section>
-    <?php if (get_option('tang_facebook') == '启用') { ?>
+    <?php if (get_option('tang_dashang') == '启用') { ?>
     <section class="support-author">
       <p><?php echo stripslashes(get_option('tang_dashang_info')); ?></p>
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal"><i class="fa fa-cny" aria-hidden="true"></i> 打赏支持</button>
