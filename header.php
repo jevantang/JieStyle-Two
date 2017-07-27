@@ -75,7 +75,7 @@ wp_head();
 
 <body>
 <header id="header">
-  <div class="avatar"><img src="<?php echo stripslashes(get_option('tang_avatar')); ?>" alt="<?php bloginfo('name'); ?>" class="img-circle" width="50%"></div>
+  <div class="avatar"><a href="<?php bloginfo('siteurl'); ?>" title="<?php bloginfo('name'); ?>"><img src="<?php echo stripslashes(get_option('tang_avatar')); ?>" alt="<?php bloginfo('name'); ?>" class="img-circle" width="50%"></a></div>
   <h1 id="name"><?php bloginfo('name'); ?></h1>
   <div class="sns">
     <a href="<?php bloginfo('rss2_url'); ?>" target="_blank" rel="nofollow" title="RSS"><i class="fa fa-rss" aria-hidden="true"></i></a>
