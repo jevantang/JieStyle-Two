@@ -40,7 +40,7 @@
 <aside class="widget clearfix">
   <h4 class="widget-title">友情链接</h4>
   <ul class="widget-links">
-    <?php wp_list_bookmarks('title_li=&categorize=0'); is_home() ?>
+    <?php wp_list_bookmarks('title_li=0&categorize=0&orderby=rating&order=desc'); ?>
   </ul>
 </aside>
 <?php } ?>
