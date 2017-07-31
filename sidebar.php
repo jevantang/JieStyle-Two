@@ -12,7 +12,7 @@
   <h4 class="widget-title">文章分类</h4>
   <div class="widget-cat">
     <ul>
-      <?php wp_list_categories('depth=1&title_li=0&orderby=name&show_count=1'); ?>
+      <?php wp_list_categories('depth=1&title_li=0&orderby=id&show_count=1'); ?>
     </ul>
   </div>
 </aside>
