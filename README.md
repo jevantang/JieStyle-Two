@@ -24,8 +24,8 @@ WordPress Themes
 * 主题作者：唐杰
 * 作者博客：[https://tangjie.me](https://tangjie.me)
 * 首发时间：2016-11-20
-* 最新版本：V2.2.3
-* 最后更新：2017-07-29
+* 最新版本：V2.3
+* 最后更新：2017-08-02
 
 ## 主题配置
 * 1、配置JieStyle的设置（外观 -> 主题 -> JieStyle设置）

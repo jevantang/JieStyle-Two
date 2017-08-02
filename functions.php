@@ -228,120 +228,162 @@ function comment_mail_notify($comment_id) {
 }
 add_action('comment_post', 'comment_mail_notify');
 
+// 颜色选择器
+function color_picker_assets() {
+    wp_enqueue_style( 'wp-color-picker' );
+    wp_enqueue_script( 'my-color-picker-handle', plugins_url('my-plugin.js', __FILE__ ), array( 'wp-color-picker' ), false, true );
+}
+add_action( 'admin_enqueue_scripts', 'color_picker_assets' );
+
 ?>
 <?php
 $themename = "JieStyle";
 $shortname = "tang";
 $options = array (
-	array("name" => "标题（Title)",
-	"id" => $shortname."_title",
-	"type" => "text",
-	"std" => "网站标题",
-	"explain" => "SEO设置<br>它将显示在网站首页的title标签里，必填项。"
+	array(
+		"name" => "首页标题 Title",
+		"id" => $shortname."_title",
+		"type" => "text",
+		"std" => "它将显示在首页的 title 标签里"
 	),
-	array("name" => "描述（Description）",
-	"id" => $shortname."_description",
-	"type" => "textarea",
-	"css" => "class='h80px'",
-	"std" => "网站描述",
-	"explain" => "SEO设置<br>它将显示在网站首页的meta标签的description属性里"
+	array(
+		"name" => "首页描述 Description",
+		"id" => $shortname."_description",
+		"type" => "textarea",
+		"std" => "它将显示在首页的 meta 标签的 description 属性里"
 	),
-	array("name" => "关键字（KeyWords）",
-	"id" => $shortname."_keywords",
-	"type" => "textarea",
-	"css" => "class='h60px'",
-	"std" => "网站关键字",
-	"explain" => "SEO设置<br>多个关键字请以英文逗号隔开，它将显示在网站首页的meta标签的keywords属性里"
+	array(
+		"name" => "首页关键字 KeyWords",
+		"id" => $shortname."_keywords",
+		"type" => "textarea",
+		"std" => "它将显示在首页的 meta 标签的 keywords 属性里。多个关键字以英文逗号隔开。"
 	),
-	array("name" => "版权年份",
-	"id" => $shortname."_years",
-	"std" => "2016",
-	"type" => "text",
-	"explain" => "它将显示在页面底部"
+	array(
+		"type" => "hr",
 	),
-	array("name" => "统计代码",
-	"id" => $shortname."_tongji",
-	"type" => "textarea",
-	"css" => "class='h80px'",
-	"explain" => "页面底部可以显示第三方统计<br>您可以放一个或者多个统计代码"
+	array(
+		"name" => "版权年份",
+		"id" => $shortname."_years",
+		"type" => "text",
+		"std" => "2017",
 	),
-	array("name" => "头像",
-    "id" => $shortname."_avatar",
-    "type" => "text",
-    "std" => "https://tangjie.me/wp-content/themes/JieStyle-Two/images/avatar.jpg",
-	"explain" => "头像图片链接"
+	array(
+		"name" => "版权公司",
+		"id" => $shortname."_company",
+		"type" => "text",
+		"std" => "产品经理@唐杰",
 	),
-	array("name" => "是否显示微信公众号",
-    "id" => $shortname."_weixin",
-    "type" => "select",
-    "std" => "隐藏",
-    "options" => array("隐藏", "显示")
+	array(
+		"type" => "hr",
 	),
-	array("name" => "微信公众号图片",
-    "id" => $shortname."_weixin_img",
-    "type" => "text",
-    "std" => "https://tangjie.me/media/weixin.jpg",
-	  "explain" => "请输入您的二维码图片链接"
+	array(
+		"name" => "导航栏色调",
+		"id" => $shortname."_color",
+		"type" => "color",
+		"std" => "#5bc0eb",
 	),
-	array("name" => "是否显示新浪微博",
-    "id" => $shortname."_weibo",
-    "type" => "select",
-    "std" => "隐藏",
-    "options" => array("隐藏", "显示")
+	array(
+		"name" => "头像图片链接",
+		"id" => $shortname."_avatar",
+		"type" => "text",
+		"std" => "https://tangjie.me/wp-content/themes/JieStyle-Two/images/avatar.jpg",
 	),
-	array("name" => "新浪微博地址",
-    "id" => $shortname."_weibo_url",
-    "type" => "text",
-    "std" => "https://weibo.com/782622",
-	"explain" => "请输入您的新浪微博地址"
+	array(
+		"name" => "是否显示微信公众号",
+		"id" => $shortname."_weixin",
+		"type" => "select",
+		"std" => "隐藏",
+		"options" => array("隐藏", "显示")
 	),
-	array("name" => "是否显示Twitter",
-    "id" => $shortname."_twitter",
-    "type" => "select",
-    "std" => "隐藏",
-    "options" => array("隐藏", "显示")
+	array(
+		"name" => "公众号二维码图片",
+		"id" => $shortname."_weixin_img",
+		"type" => "text",
+		"std" => "https://tangjie.me/media/weixin.jpg",
 	),
-	array("name" => "Twitter地址",
-    "id" => $shortname."_twitter_url",
-    "type" => "text",
-    "std" => "https://twitter.com/JieTangOK",
-	"explain" => "请输入您的Twitter地址"
+	array(
+		"type" => "hr",
 	),
-	array("name" => "是否显示Facebook",
-    "id" => $shortname."_facebook",
-    "type" => "select",
-    "std" => "隐藏",
-    "options" => array("隐藏", "显示")
+	array(
+		"name" => "是否显示Weibo",
+		"id" => $shortname."_weibo",
+		"type" => "select",
+		"std" => "隐藏",
+		"options" => array("隐藏", "显示")
 	),
-	array("name" => "Facebook地址",
-    "id" => $shortname."_facebook_url",
-    "type" => "text",
-    "std" => "https://www.facebook.com/jietangok",
-	  "explain" => "请输入您的Facebook地址"
+	array(
+		"name" => "Weibo地址",
+		"id" => $shortname."_weibo_url",
+		"type" => "text",
+		"std" => "https://weibo.com/782622",
 	),
-	array("name" => "打赏-是否启用（文章页）",
-    "id" => $shortname."_dashang",
-    "type" => "select",
-    "std" => "禁用",
-    "options" => array("禁用", "启用")
+	array(
+		"name" => "是否显示Twitter",
+		"id" => $shortname."_twitter",
+		"type" => "select",
+		"std" => "隐藏",
+		"options" => array("隐藏", "显示")
 	),
-	array("name" => "打赏-描述",
-    "id" => $shortname."_dashang_info",
-    "type" => "text",
-    "std" => "如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作！",
-	  "explain" => "想对读者说的话"
+	array(
+		"name" => "Twitter地址",
+		"id" => $shortname."_twitter_url",
+		"type" => "text",
+		"std" => "https://twitter.com/JieTangOK",
 	),
-	array("name" => "打赏-支付宝",
-    "id" => $shortname."_dashang_alipay",
-    "type" => "text",
-    "std" => "https://tangjie.me/media/AliPay.png",
-	  "explain" => "支付宝二维码图片链接"
+	array(
+		"name" => "是否显示Facebook",
+		"id" => $shortname."_facebook",
+		"type" => "select",
+		"std" => "隐藏",
+		"options" => array("隐藏", "显示")
 	),
-	array("name" => "打赏-微信",
-    "id" => $shortname."_dashang_wechat",
-    "type" => "text",
-    "std" => "https://tangjie.me/media/WeixinPay.png",
-	  "explain" => "微信收款二维码图片链接"
+	array(
+		"name" => "Facebook地址",
+		"id" => $shortname."_facebook_url",
+		"type" => "text",
+		"std" => "https://www.facebook.com/jietangok",
+	),
+	array(
+		"name" => "是否显示GitHub",
+		"id" => $shortname."_github",
+		"type" => "select",
+		"std" => "隐藏",
+		"options" => array("隐藏", "显示")
+	),
+	array(
+		"name" => "GitHub地址",
+		"id" => $shortname."_github_url",
+		"type" => "text",
+		"std" => "https://github.com/Jarvis-Tang",
+	),
+	array(
+		"type" => "hr",
+	),
+	array(
+		"name" => "打赏-是否启用",
+		"id" => $shortname."_dashang",
+		"type" => "select",
+		"std" => "禁用",
+		"options" => array("禁用", "启用")
+	),
+	array(
+		"name" => "打赏-描述",
+		"id" => $shortname."_dashang_info",
+		"type" => "text",
+		"std" => "如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作！",
+		"explain" => "想对读者说的话"
+	),
+	array(
+		"name" => "打赏-支付宝",
+		"id" => $shortname."_dashang_alipay",
+		"type" => "text",
+		"std" => "https://tangjie.me/media/AliPay.png",
+	),
+	array(
+		"name" => "打赏-微信",
+		"id" => $shortname."_dashang_wechat",
+		"type" => "text",
+		"std" => "https://tangjie.me/media/WeixinPay.png",
 	),
 );
 function mytheme_add_admin() {
@@ -367,79 +409,85 @@ function mytheme_add_admin() {
 }
 function mytheme_admin() {
     global $themename, $shortname, $options;
-    if ( $_REQUEST['saved'] ) echo '<div id="message" class="updated fade"><p><strong>'.$themename.' 设置已保存。</strong></p></div>';
-    if ( $_REQUEST['reset'] ) echo '<div id="message" class="updated fade"><p><strong>'.$themename.' 设置已重置。</strong></p></div>';
+	if ( $_REQUEST['saved'] ) echo '<div id="message" class="updated notice is-dismissible"><p>'.$themename.' 设置已保存。</p></div>';
+
 ?>
-<style type="text/css">
-.wrap h2 {color:#09C;}
-.themeadmin {border:1px dashed #999;margin-top:20px;width:420px;position:10px;}
-.options {margin-top:20px;}
-.options input,.options textarea {padding:2px;border:1px solid;border-color:#666 #CCC #CCC #666;background:#F9F9F9;color:#333;resize:none;width:400px;}
-.options .h80px {height:80px;}
-.options .h60px {height:60px;}
-.options .setup {border-top:1px dotted #CCC;padding:10px 0 10px 10px;overflow:hidden;}
-.options .setup h3 {font-size:14px;margin:0;padding:0;}
-.options .setup .value {float:left;width:410px;}
-.options .setup .explain {float:left;}
-</style>
-<div class="wrap">
-  <h2><b><?php echo $themename; ?>主题设置</b></h2>
-  <hr />
-  <div>主题作者：<a href="https://tangjie.me" target="_blank">唐杰</a> ¦ 当前版本：<a href="https://tangjie.me/jiestyle" target="_blank">V2.2</a> ¦ 主题介绍、使用帮助及升级请访问：<a href="https://tangjie.me/jiestyle" target="_blank">https://tangjie.me/JieStyle</a></div>
-  <form method="post">
-    <div class="options">
-      <?php foreach ($options as $value) {if ($value['type'] == "text") { ?>
-      <div class="setup">
-        <h3><?php echo $value['name']; ?></h3>
-        <div class="value">
-          <input name="<?php echo $value['id']; ?>" id="<?php echo $value['id']; ?>" type="<?php echo $value['type']; ?>" value="<?php if ( get_settings( $value['id'] ) != "") { echo stripslashes(get_settings( $value['id']) ); } else { echo $value['std']; } ?>" />
-        </div>
-        <div class="explain"><?php echo $value['explain']; ?></div>
-      </div>
-      <?php } elseif ($value['type'] == "textarea") { ?>
-      <div class="setup">
-        <h3><?php echo $value['name']; ?></h3>
-        <div class="value">
-          <textarea name="<?php echo $value['id']; ?>" type="<?php echo $value['type']; ?>" <?php echo $value['css']; ?> ><?php if ( get_settings( $value['id'] ) != "") { echo stripslashes(get_settings( $value['id']) ); } else { echo $value['std']; } ?>
-</textarea>
-        </div>
-        <div class="explain"><?php echo $value['explain']; ?></div>
-      </div>
-      <?php } elseif ($value['type'] == "select") { ?>
-      <div class="setup">
-        <h3><?php echo $value['name']; ?></h3>
-        <div class="value">
-          <select name="<?php echo $value['id']; ?>" id="<?php echo $value['id']; ?>">
-            <?php foreach ($value['options'] as $option) { ?>
-            <option value="<?php echo $option;?>" <?php if (get_settings( $value['id'] ) == $option) { echo 'selected="selected"'; } ?>>
-            <?php
-              if ((empty($option) || $option == '' ) && isset($value['option'])) {
-                echo $value['option'];
-              } else {
-                echo $option;
-              }
-            ?>
-            </option>
-            <?php } ?>
-          </select>
-        </div>
-        <div class="explain"><?php echo $value['explain']; ?></div>
-      </div>
-      <?php } ?>
-      <?php } ?>
-    </div>
-    <div class="submit">
-      <input style="font-size:12px !important;" name="save" type="submit" value="保存设置" class="button-primary" />
-      <input type="hidden" name="action" value="save" />
-    </div>
-  </form>
-  <form method="post">
-    <div style="margin:50px 0;border-top:1px solid #F00;padding-top:10px;">
-      <input style="font-size:12px !important;" name="reset" type="submit" value="还原默认设置" />
-      <input type="hidden" name="action" value="reset" />
-    </div>
-  </form>
+
+<link rel="stylesheet" href="<?php bloginfo('template_directory'); ?>/css/bootstrap.min.css">
+<script src="<?php bloginfo('template_directory'); ?>/js/jquery.min.js"></script>
+<script src="<?php bloginfo('template_directory'); ?>/js/bootstrap.min.js"></script>
+
+<div class="container-fluid">
+	<h2 class="text-primary"><?php echo $themename; ?> <a href="https://tangjie.me/jiestyle#Two" target="_blank" data-toggle="tooltip" data-placement="bottom" title="点击查看更新"><span class="badge">V2.3</span></a></h2>
+	<hr class="wp-header-end">
+	<hr>
+	<form class="form-horizontal" method="post">
+	<?php foreach ($options as $value) {
+		if ($value['type'] == "text") { ?>
+		<div class="form-group">
+			<label for="options" class="col-sm-2 control-label"><?php echo $value['name']; ?></label>
+			<div class="col-sm-10">
+				<input class="form-control" name="<?php echo $value['id']; ?>" id="<?php echo $value['id']; ?>" type="<?php echo $value['type']; ?>" value="<?php if ( get_settings( $value['id'] ) != "") { echo stripslashes(get_settings( $value['id']) ); } else { echo $value['std']; } ?>" />
+			</div>
+		</div>
+		<?php } elseif ($value['type'] == "textarea") { ?>
+		<div class="form-group">
+			<label for="options" class="col-sm-2 control-label"><?php echo $value['name']; ?></label>
+			<div class="col-sm-10">
+				<textarea class="form-control" rows="3" name="<?php echo $value['id']; ?>" type="<?php echo $value['type']; ?>" ><?php if ( get_settings( $value['id'] ) != "") { echo stripslashes(get_settings( $value['id']) ); } else { echo $value['std']; } ?></textarea>
+			</div>
+		</div>
+		<?php } elseif ($value['type'] == "color") { ?>
+		<div class="form-group">
+			<label for="options" class="col-sm-2 control-label"><?php echo $value['name']; ?></label>
+			<div class="col-sm-4">
+				<input name="<?php echo $value['id']; ?>" id="mail-border-color" type="text"  value="<?php if ( get_settings( $value['id'] ) != "") { echo stripslashes(get_settings( $value['id']) ); } else { echo $value['std']; } ?>" />
+			</div>
+			<div class="col-sm-4">
+				<p class="form-control-static">默认颜色 #5bc0eb</p>
+			</div>
+		</div>
+		<?php } elseif ($value['type'] == "select") { ?>
+		<div class="form-group">
+			<label for="options" class="col-sm-2 control-label"><?php echo $value['name']; ?></label>
+			<div class="col-sm-2">
+				<select class="form-control" name="<?php echo $value['id']; ?>" id="<?php echo $value['id']; ?>">
+					<?php foreach ($value['options'] as $option) { ?>
+					<option value="<?php echo $option;?>" <?php if (get_settings( $value['id'] ) == $option) { echo 'selected="selected"'; } ?>>
+						<?php
+						if ((empty($option) || $option == '' ) && isset($value['option'])) {
+							echo $value['option'];
+						} else {
+							echo $option;
+						}
+						?>
+					</option>
+					<?php } ?>
+				</select>
+			</div>
+		</div>
+		<?php } elseif ($value['type'] == "hr") { ?>
+		<hr>
+		<?php } ?>
+	<?php } ?>
+	<div class="form-group" style="margin-top:50px;">
+		<div class="col-sm-offset-2 col-sm-10">
+			<button type="submit" class="btn btn-primary" name="save"> 保存 </button>
+			<input type="hidden" name="action" value="save" />
+		</div>
+	</div>
+	</form>
 </div>
+
+<script>
+$(function() {
+	$('[data-toggle="tooltip"]').tooltip()
+});
+$(function () {
+	$('#mail-border-color').wpColorPicker();
+});
+</script>
+
 <?php
 }
 add_action('admin_menu', 'mytheme_add_admin');
