@@ -21,7 +21,6 @@
       <p><?php echo stripslashes(get_option('tang_dashang_info')); ?></p>
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal"><i class="fa fa-cny" aria-hidden="true"></i> 打赏支持</button>
     </section>
-    <?php { echo ''; } ?>
     <?php } else { } ?>
     <section id="comments">
       <?php comments_template(); ?>
