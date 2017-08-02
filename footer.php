@@ -9,8 +9,8 @@
 </div>
 <footer id="footer">
   <div class="copyright">
-    <p><i class="fa fa-copyright" aria-hidden="true"></i> <?php echo get_option('tang_years'); ?> <b><?php bloginfo('name'); ?></b></p>
-    <p>Powered by <b>WordPress</b>. Theme by <a href="https://tangjie.me/jiestyle" title="JieStyle" target="_blank"><b>JieStyle Two</b></a> | <?php echo get_option( 'zh_cn_l10n_icp_num' );?></p>
+    <p><i class="fa fa-copyright" aria-hidden="true"></i> <?php echo get_option('tang_years'); ?> <b><?php echo get_option('tang_company'); ?></b></p>
+    <p>Powered by <b>WordPress</b>. Theme by <a href="https://tangjie.me/jiestyle#Two" title="JieStyle" target="_blank"><b>JieStyle Two</b></a> | <?php echo get_option( 'zh_cn_l10n_icp_num' );?></p>
   </div>
   <div style="display:none;"> <?php echo stripslashes(get_option('tang_tongji')); ?> </div>
 </footer>
