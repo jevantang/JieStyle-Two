@@ -23,9 +23,10 @@ WordPress Themes
 * 主题名称：JieStyle Two
 * 主题作者：唐杰
 * 作者博客：[https://tangjie.me](https://tangjie.me)
+* 开源协议：GNU General Public License v3.0
 * 首发时间：2016-11-20
-* 最新版本：V2.3
-* 最后更新：2017-08-02
+* 最新版本：v2.3
+* 最后更新：2017-08-03
 
 ## 主题配置
 * 1、配置JieStyle的设置（外观 -> 主题 -> JieStyle设置）
