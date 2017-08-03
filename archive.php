@@ -4,11 +4,11 @@
   <div class="row box">
     <div class="col-md-8">
 	  <?php if ( is_day() ) : ?>
-      <h3 class="uptop"><i class="fa fa-calendar" aria-hidden="true"></i> <?php printf(__('Daily: %s'), get_the_date() ); ?></h3>
+      <h3 class="uptop"><i class="fa fa-calendar" aria-hidden="true"></i> <?php printf(__('日期浏览: %s'), get_the_date('Y年n月j日 D') ); ?></h3>
       <?php elseif ( is_month() ) : ?>
-      <h3 class="uptop"><i class="fa fa-calendar" aria-hidden="true"></i> <?php printf(__('Monthly: %s'), get_the_date('F Y') ); ?></h3>
+      <h3 class="uptop"><i class="fa fa-calendar" aria-hidden="true"></i> <?php printf(__('日期浏览: %s'), get_the_date('Y年M') ); ?></h3>
       <?php elseif ( is_year() ) : ?>
-      <h3 class="uptop"><i class="fa fa-calendar" aria-hidden="true"></i> <?php printf(__('Yearly: %s'), get_the_date('Y') ); ?></h3>
+      <h3 class="uptop"><i class="fa fa-calendar" aria-hidden="true"></i> <?php printf(__('日期浏览: %s'), get_the_date('Y年') ); ?></h3>
       <?php elseif ( is_tag() ) : ?>
       <h3 class="uptop"><i class="fa fa-tags" aria-hidden="true"></i> <?php printf(__('Tag: %s'), single_tag_title('', false ) ); ?></h3>
       <?php else : ?>

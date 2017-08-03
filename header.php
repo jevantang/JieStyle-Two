@@ -6,25 +6,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <?php if ( is_home() ) { ?>
 <title><?php echo stripslashes(get_option('tang_title')); ?></title>
+<meta name="description" content="<?php echo stripslashes(get_option('tang_description')); ?>" />
+<meta name="keywords" content="<?php echo stripslashes(get_option('tang_keywords')); ?>" />
 <?php } ?>
-<?php if ( is_search() ) { ?>
-<title>搜索结果 - <?php bloginfo('name'); ?></title>
-<?php } ?>
-<?php if ( is_single() ) { ?>
-<title><?php echo trim(wp_title('',0)); ?> - <?php bloginfo('name'); ?></title>
-<?php } ?>
-<?php if ( is_page() ) { ?>
-<title><?php echo trim(wp_title('',0)); ?> - <?php bloginfo('name'); ?></title>
-<?php } ?>
-<?php if ( is_category() ) { ?>
-<title><?php single_cat_title(); ?> - <?php bloginfo('name'); ?></title>
-<?php } ?>
-<?php if ( is_month() ) { ?>
-<title><?php the_time('F'); ?> - <?php bloginfo('name'); ?></title>
-<?php } ?>
-<?php if (function_exists('is_tag')) { if ( is_tag() ) { ?>
-<title><?php single_tag_title("", true); ?> - <?php bloginfo('name'); ?></title>
-<?php } } ?>
 <?php
 if (!function_exists('utf8Substr')) {
 	function utf8Substr($str, $from, $len)
@@ -52,13 +36,31 @@ if ( is_single() ){
 }
 ?>
 <?php if ( is_single() ) { ?>
+<title><?php echo trim(wp_title('',0)); ?></title>
 <meta name="description" content="<?php echo trim($description); ?>" />
 <meta name="keywords" content="<?php echo rtrim($keywords,','); ?>" />
 <?php } ?>
-<?php if ( is_home() ) { ?>
-<meta name="description" content="<?php echo stripslashes(get_option('tang_description')); ?>" />
-<meta name="keywords" content="<?php echo stripslashes(get_option('tang_keywords')); ?>" />
+<?php if ( is_page() ) { ?>
+<title><?php echo trim(wp_title('',0)); ?></title>
 <?php } ?>
+<?php if ( is_category() ) { ?>
+<title><?php single_cat_title(); ?> - <?php bloginfo('name'); ?></title>
+<?php } ?>
+<?php if ( is_search() ) { ?>
+<title>搜索结果 - <?php bloginfo('name'); ?></title>
+<?php } ?>
+<?php if ( is_day() ) { ?>
+<title><?php the_time('Y年n月j日'); ?> - <?php bloginfo('name'); ?></title>
+<?php } ?>
+<?php if ( is_month() ) { ?>
+<title><?php the_time('Y年M'); ?> - <?php bloginfo('name'); ?></title>
+<?php } ?>
+<?php if ( is_year() ) { ?>
+<title><?php the_time('Y年'); ?> - <?php bloginfo('name'); ?></title>
+<?php } ?>
+<?php if (function_exists('is_tag')) { if ( is_tag() ) { ?>
+<title><?php single_tag_title("", true); ?> - <?php bloginfo('name'); ?></title>
+<?php } } ?>
 <link rel="shortcut icon" href="<?php bloginfo('template_directory'); ?>/images/favicon.ico" type="image/x-icon" />
 <link rel="stylesheet" href="<?php bloginfo('template_directory'); ?>/css/bootstrap.min.css">
 <link rel="stylesheet" href="<?php bloginfo('template_directory'); ?>/css/font-awesome.min.css">
