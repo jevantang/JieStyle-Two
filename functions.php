@@ -418,7 +418,7 @@ function mytheme_admin() {
 <script src="<?php bloginfo('template_directory'); ?>/js/bootstrap.min.js"></script>
 
 <div class="container-fluid">
-	<h2 class="text-primary"><?php echo $themename; ?> <a href="https://tangjie.me/jiestyle-two" target="_blank" data-toggle="tooltip" data-placement="bottom" title="点击查看更新"><span class="badge">V2.3</span></a></h2>
+	<h2 class="text-primary"><?php echo $themename; ?> <a href="https://tangjie.me/jiestyle-two" target="_blank" data-toggle="tooltip" data-placement="bottom" title="点击查看更新"><span class="badge">v2.3</span></a></h2>
 	<hr class="wp-header-end">
 	<hr>
 	<form class="form-horizontal" method="post">
