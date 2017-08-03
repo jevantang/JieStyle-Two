@@ -7,6 +7,18 @@ add_filter( 'wp_page_menu_args', 'tangstyle_page_menu_args' );
 if ( ! function_exists( 'tangstyle_content_nav' ) ) :
 register_nav_menus(array('header-menu' => __( 'JieStyle导航菜单' ),));
 
+//禁用修订版本
+add_filter( 'wp_revisions_to_keep', 'specs_wp_revisions_to_keep', 10, 2 );
+function specs_wp_revisions_to_keep( $post ) {
+	return 0;
+}
+
+//禁用自动草稿
+add_action('wp_print_scripts','disable_autosave');
+function disable_autosave(){  
+    wp_deregister_script('autosave'); 
+}
+
 //去除头部无用代码
 remove_action( 'wp_head', 'feed_links', 2 );
 remove_action( 'wp_head', 'feed_links_extra', 3 );
