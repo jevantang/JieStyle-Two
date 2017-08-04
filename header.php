@@ -73,48 +73,46 @@ if ( is_singular() && get_option( 'thread_comments' ) )
 wp_enqueue_script( 'comment-reply' );
 wp_head();
 ?>
+<style type="text/css">
+a{color:<?php echo stripslashes(get_option('tang_color')); ?>}
+a:hover{color:<?php echo stripslashes(get_option('tang_color_hover')); ?>!important}
+.widget .widget-title::after{background-color:<?php echo stripslashes(get_option('tang_color')); ?>}
+.uptop{border-left-color:<?php echo stripslashes(get_option('tang_color')); ?>}
+</style>
 </head>
 
 <body>
 <header id="header" style="background-color:<?php echo stripslashes(get_option('tang_color')); ?>">
-  <div class="avatar"><a href="<?php bloginfo('siteurl'); ?>" title="<?php bloginfo('name'); ?>"><img src="<?php echo stripslashes(get_option('tang_avatar')); ?>" alt="<?php bloginfo('name'); ?>" class="img-circle" width="50%"></a></div>
-  <h1 id="name"><?php bloginfo('name'); ?></h1>
-  <div class="sns">
-    <a href="<?php bloginfo('rss2_url'); ?>" target="_blank" rel="nofollow" title="RSS"><i class="fa fa-rss" aria-hidden="true"></i></a>
-    <?php if (get_option('tang_weibo') == '显示') { ?>
-    <a href="<?php echo stripslashes(get_option('tang_weibo_url')); ?>" target="_blank" rel="nofollow" title="Weibo"><i class="fa fa-weibo" aria-hidden="true"></i></a>
-    <?php } else { } ?>
-    <?php if (get_option('tang_twitter') == '显示') { ?>
-    <a href="<?php echo stripslashes(get_option('tang_twitter_url')); ?>" target="_blank" rel="nofollow" title="Twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-    <?php } else { } ?>
-    <?php if (get_option('tang_facebook') == '显示') { ?>
-    <a href="<?php echo stripslashes(get_option('tang_facebook_url')); ?>" target="_blank" rel="nofollow" title="Facebook"><i class="fa fa-facebook-square" aria-hidden="true"></i></a>
-    <?php } else { } ?>
-    <?php if (get_option('tang_github') == '显示') { ?>
-    <a href="<?php echo stripslashes(get_option('tang_github_url')); ?>" target="_blank" rel="nofollow" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a>
-    <?php } else { } ?>
-  </div>
-  <div class="nav">
-   <?php wp_nav_menu (array(
-   'theme_location'  => 'header-menu',
-   'container'       => false,
-   'menu'            => '',
-   'menu_id'         => 'nav',
-   'echo'            => true,
-   'fallback_cb'     => '',
-   'before'          => '',
-   'after'           => '',
-   'link_before'     => '',
-   'link_after'      => '',
-   'items_wrap'      => '<ul>%3$s</ul>',
-   'depth'           => 0,
-   'walker'          => '',)
-   ); ?>
-  </div>
-  <?php if (get_option('tang_weixin') == '显示') { ?>
-  <div class="weixin">
-    <img src="<?php echo stripslashes(get_option('tang_weixin_img')); ?>" alt="微信公众号" width="50%">
-    <p>微信公众号</p>
-  </div>
-  <?php } else { } ?>
+	<div class="avatar"><a href="<?php bloginfo('siteurl'); ?>" title="<?php bloginfo('name'); ?>"><img src="<?php echo stripslashes(get_option('tang_avatar')); ?>" alt="<?php bloginfo('name'); ?>" class="img-circle" width="50%"></a></div>
+	<h1 id="name"><?php bloginfo('name'); ?></h1>
+	<div class="sns">
+		<?php if (get_option('tang_rss') == '显示') { ?><a href="<?php bloginfo('rss2_url'); ?>" target="_blank" rel="nofollow" title="RSS"><i class="fa fa-rss" aria-hidden="true"></i></a><?php } ?>
+		<?php if (get_option('tang_weibo') == '显示') { ?><a href="<?php echo stripslashes(get_option('tang_weibo_url')); ?>" target="_blank" rel="nofollow" title="Weibo"><i class="fa fa-weibo" aria-hidden="true"></i></a><?php } ?>
+		<?php if (get_option('tang_twitter') == '显示') { ?><a href="<?php echo stripslashes(get_option('tang_twitter_url')); ?>" target="_blank" rel="nofollow" title="Twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a><?php } ?>
+		<?php if (get_option('tang_facebook') == '显示') { ?><a href="<?php echo stripslashes(get_option('tang_facebook_url')); ?>" target="_blank" rel="nofollow" title="Facebook"><i class="fa fa-facebook-square" aria-hidden="true"></i></a><?php } ?>
+		<?php if (get_option('tang_github') == '显示') { ?><a href="<?php echo stripslashes(get_option('tang_github_url')); ?>" target="_blank" rel="nofollow" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a><?php } ?>
+	</div>
+	<div class="nav">
+		<?php wp_nav_menu (array(
+			'theme_location'  => 'header-menu',
+			'container'       => false,
+			'menu'            => '',
+			'menu_id'         => 'nav',
+			'echo'            => true,
+			'fallback_cb'     => '',
+			'before'          => '',
+			'after'           => '',
+			'link_before'     => '',
+			'link_after'      => '',
+			'items_wrap'      => '<ul>%3$s</ul>',
+			'depth'           => 0,
+			'walker'          => '',)
+		); ?>
+	</div>
+	<?php if (get_option('tang_weixin') == '显示') { ?>
+	<div class="weixin">
+		<img src="<?php echo stripslashes(get_option('tang_weixin_img')); ?>" alt="微信公众号" width="50%">
+		<p>微信公众号</p>
+	</div>
+	<?php } ?>
 </header>

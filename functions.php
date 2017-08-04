@@ -7,19 +7,19 @@ add_filter( 'wp_page_menu_args', 'tangstyle_page_menu_args' );
 if ( ! function_exists( 'tangstyle_content_nav' ) ) :
 register_nav_menus(array('header-menu' => __( 'JieStyle导航菜单' ),));
 
-//禁用修订版本
+// 禁用修订版本
 add_filter( 'wp_revisions_to_keep', 'specs_wp_revisions_to_keep', 10, 2 );
 function specs_wp_revisions_to_keep( $post ) {
 	return 0;
 }
 
-//禁用自动草稿
+// 禁用自动草稿
 add_action('wp_print_scripts','disable_autosave');
 function disable_autosave(){  
     wp_deregister_script('autosave'); 
 }
 
-//去除头部无用代码
+// 去除头部无用代码
 remove_action( 'wp_head', 'feed_links', 2 );
 remove_action( 'wp_head', 'feed_links_extra', 3 );
 remove_action( 'wp_head', 'rsd_link' );
@@ -46,21 +46,30 @@ remove_action( 'rest_api_init', 'wp_oembed_register_route');
 remove_filter( 'rest_pre_serve_request', '_oembed_rest_pre_serve_request', 10, 4);
 remove_filter( 'oembed_dataparse', 'wp_filter_oembed_result', 10);
 remove_filter( 'oembed_response_data', 'get_oembed_response_data_rich', 10, 4);
-
 add_filter('rest_enabled', '__return_false');
 add_filter('rest_jsonp_enabled', '__return_false');
 
-//启动友情链接
-add_filter( 'pre_option_link_manager_enabled', '__return_true' );
-
-//替换Gravatar服务器
-function kratos_get_avatar( $avatar ) {
-$avatar = preg_replace( "/http:\/\/(www|\d).gravatar.com/","https://cn.gravatar.com",$avatar );
-return $avatar;
+// 禁用Emoji表情
+function disable_emojis() {
+ remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
+ remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
+ remove_action( 'wp_print_styles', 'print_emoji_styles' );
+ remove_action( 'admin_print_styles', 'print_emoji_styles' ); 
+ remove_filter( 'the_content_feed', 'wp_staticize_emoji' );
+ remove_filter( 'comment_text_rss', 'wp_staticize_emoji' ); 
+ remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
+ add_filter( 'tiny_mce_plugins', 'disable_emojis_tinymce' );
 }
-add_filter( 'get_avatar', 'kratos_get_avatar' );
+add_action( 'init', 'disable_emojis' );
+function disable_emojis_tinymce( $plugins ) {
+ if ( is_array( $plugins ) ) {
+ return array_diff( $plugins, array( 'wpemoji' ) );
+ } else {
+ return array();
+ }
+}
 
-//移除菜单的多余CSS选择器
+// 移除菜单的多余CSS选择器
 add_filter('nav_menu_css_class', 'my_css_attributes_filter', 100, 1);
 add_filter('nav_menu_item_id', 'my_css_attributes_filter', 100, 1);
 add_filter('page_css_class', 'my_css_attributes_filter', 100, 1);
@@ -68,7 +77,101 @@ function my_css_attributes_filter($var) {
   return is_array($var) ? array() : '';
 }
 
-//评论模板
+// 启动友情链接
+add_filter( 'pre_option_link_manager_enabled', '__return_true' );
+
+// 替换Gravatar服务器
+function kratos_get_avatar( $avatar ) {
+$avatar = preg_replace( "/http:\/\/(www|\d).gravatar.com/","https://cn.gravatar.com",$avatar );
+return $avatar;
+}
+add_filter( 'get_avatar', 'kratos_get_avatar' );
+
+// 获得热评文章
+function tangstyle_get_most_viewed($posts_num=10, $days=180){
+    global $wpdb;
+    $sql = "SELECT ID , post_title , comment_count FROM $wpdb->posts WHERE post_type = 'post' AND TO_DAYS(now()) - TO_DAYS(post_date) < $days AND ($wpdb->posts.`post_status` = 'publish' OR $wpdb->posts.`post_status` = 'inherit') ORDER BY comment_count DESC LIMIT 0 , $posts_num ";
+    $posts = $wpdb->get_results($sql);
+    $output = "";
+    foreach ($posts as $post){
+        $output .= "\n<li><a href=\"".get_permalink($post->ID)."\" target=\"_blank\" >".$post->post_title."</a></li>";
+    }
+    echo $output;
+}
+
+// 分页
+function pagination($query_string){
+global $posts_per_page, $paged;
+$my_query = new WP_Query($query_string ."&posts_per_page=-1");
+$total_posts = $my_query->post_count;
+if(empty($paged))$paged = 1;
+$prev = $paged - 1;							
+$next = $paged + 1;	
+$range = 5; // 分页数设置
+$showitems = ($range * 2)+1;
+$pages = ceil($total_posts/$posts_per_page);
+if(1 != $pages){
+	echo "<ul class='pagination'>";
+	echo ($paged > 2 && $paged+$range+1 > $pages && $showitems < $pages)? "<li><a href='".get_pagenum_link(1)."'><i class='fa fa-angle-double-left' aria-hidden='true'></i></a></li>":"";
+	echo ($paged > 1 && $showitems < $pages)? "<li><a href='".get_pagenum_link($prev)."'><i class='fa fa-angle-left' aria-hidden='true'></i></a></li>":"";		
+	for ($i=1; $i <= $pages; $i++){
+	if (1 != $pages &&( !($i >= $paged+$range+1 || $i <= $paged-$range-1) || $pages <= $showitems )){
+	echo ($paged == $i)? "<li class='active'><a href='".get_pagenum_link($i)."'>".$i."<span class='sr-only'>(current)</span></a></li>":"<li><a href='".get_pagenum_link($i)."'>".$i."</a></li>"; 
+	}
+	}
+	echo ($paged < $pages && $showitems < $pages) ? "<li><a href='".get_pagenum_link($next)."'><i class='fa fa-angle-right' aria-hidden='true'></i></a></li>" :"";
+	echo ($paged < $pages-1 &&  $paged+$range-1 < $pages && $showitems < $pages) ? "<li><a href='".get_pagenum_link($pages)."'><i class='fa fa-angle-double-right' aria-hidden='true'></i></a></li>":"";
+	echo "</ul>\n";
+	}
+}
+
+// 彩色标签云
+function colorCloud($text) {
+$text = preg_replace_callback('|<a (.+?)>|i', 'colorCloudCallback', $text);
+return $text;
+}
+function colorCloudCallback($matches) {
+$text = $matches[1];
+$color = dechex(rand(0,16777215));
+$pattern = '/style=(\'|\")(.*)(\'|\")/i';
+$text = preg_replace($pattern, "style=\"color:#{$color};$2;\"", $text);
+return "<a $text>";
+}
+add_filter('wp_tag_cloud', 'colorCloud', 1);
+
+// 新窗口打开评论里的链接 | 加跳转 /go.php?url=
+function remove_comment_links() {
+global $comment;
+$url = get_comment_author_url();
+$author = get_comment_author();
+if ( empty( $url ) || 'http://' == $url )
+$return = $author;
+else
+$return = "<a href='$url' rel='nofollow' target='_blank'>$author</a>";
+return $return;
+}
+add_filter('get_comment_author_link', 'remove_comment_links');
+remove_filter('comment_text', 'make_clickable', 9);
+
+// 百度ping功能
+function wpyou_baiping($post_id) {
+$baiduXML = 'weblogUpdates.extendedPing' . get_option('blogname') . ' ' . home_url() . ' ' . get_permalink($post_id) . ' ' . get_feed_link() . ' ';
+$wp_http_obj = new WP_Http();
+$return = $wp_http_obj->post('http://ping.baidu.com/ping/RPC2', array('body' => $baiduXML, 'headers' => array('Content-Type' => 'text/xml')));
+if(isset($return['body'])){
+if(strstr($return['body'], '0')){
+$noff_log='succeeded!';
+}
+else{
+$noff_log='failed!';
+}
+}else{
+$noff_log='failed!';
+}
+}
+add_action('publish_post', 'wpyou_baiping');
+
+// 评论模板
 function tangstyle_comment( $comment, $args, $depth ) {
 	$GLOBALS['comment'] = $comment;
 	switch ( $comment->comment_type ) :
@@ -104,110 +207,6 @@ function tangstyle_comment( $comment, $args, $depth ) {
   endswitch;
 }
 endif;
-
-//禁用Emoji表情
-function disable_emojis() {
- remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
- remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
- remove_action( 'wp_print_styles', 'print_emoji_styles' );
- remove_action( 'admin_print_styles', 'print_emoji_styles' ); 
- remove_filter( 'the_content_feed', 'wp_staticize_emoji' );
- remove_filter( 'comment_text_rss', 'wp_staticize_emoji' ); 
- remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
- add_filter( 'tiny_mce_plugins', 'disable_emojis_tinymce' );
-}
-add_action( 'init', 'disable_emojis' );
-function disable_emojis_tinymce( $plugins ) {
- if ( is_array( $plugins ) ) {
- return array_diff( $plugins, array( 'wpemoji' ) );
- } else {
- return array();
- }
-}
-
-// 获得热评文章
-function tangstyle_get_most_viewed($posts_num=10, $days=180){
-    global $wpdb;
-    $sql = "SELECT ID , post_title , comment_count FROM $wpdb->posts WHERE post_type = 'post' AND TO_DAYS(now()) - TO_DAYS(post_date) < $days AND ($wpdb->posts.`post_status` = 'publish' OR $wpdb->posts.`post_status` = 'inherit') ORDER BY comment_count DESC LIMIT 0 , $posts_num ";
-    $posts = $wpdb->get_results($sql);
-    $output = "";
-    foreach ($posts as $post){
-        $output .= "\n<li><a href=\"".get_permalink($post->ID)."\" target=\"_blank\" >".$post->post_title."</a></li>";
-    }
-    echo $output;
-}
-
-//分页
-function pagination($query_string){
-global $posts_per_page, $paged;
-$my_query = new WP_Query($query_string ."&posts_per_page=-1");
-$total_posts = $my_query->post_count;
-if(empty($paged))$paged = 1;
-$prev = $paged - 1;							
-$next = $paged + 1;	
-$range = 5; // 分页数设置
-$showitems = ($range * 2)+1;
-$pages = ceil($total_posts/$posts_per_page);
-if(1 != $pages){
-	echo "<ul class='pagination'>";
-	echo ($paged > 2 && $paged+$range+1 > $pages && $showitems < $pages)? "<li><a href='".get_pagenum_link(1)."'><i class='fa fa-angle-double-left' aria-hidden='true'></i></a></li>":"";
-	echo ($paged > 1 && $showitems < $pages)? "<li><a href='".get_pagenum_link($prev)."'><i class='fa fa-angle-left' aria-hidden='true'></i></a></li>":"";		
-	for ($i=1; $i <= $pages; $i++){
-	if (1 != $pages &&( !($i >= $paged+$range+1 || $i <= $paged-$range-1) || $pages <= $showitems )){
-	echo ($paged == $i)? "<li class='active'><a href='".get_pagenum_link($i)."'>".$i."<span class='sr-only'>(current)</span></a></li>":"<li><a href='".get_pagenum_link($i)."'>".$i."</a></li>"; 
-	}
-	}
-	echo ($paged < $pages && $showitems < $pages) ? "<li><a href='".get_pagenum_link($next)."'><i class='fa fa-angle-right' aria-hidden='true'></i></a></li>" :"";
-	echo ($paged < $pages-1 &&  $paged+$range-1 < $pages && $showitems < $pages) ? "<li><a href='".get_pagenum_link($pages)."'><i class='fa fa-angle-double-right' aria-hidden='true'></i></a></li>":"";
-	echo "</ul>\n";
-	}
-}
-
-//彩色标签云
-function colorCloud($text) {
-$text = preg_replace_callback('|<a (.+?)>|i', 'colorCloudCallback', $text);
-return $text;
-}
-function colorCloudCallback($matches) {
-$text = $matches[1];
-$color = dechex(rand(0,16777215));
-$pattern = '/style=(\'|\")(.*)(\'|\")/i';
-$text = preg_replace($pattern, "style=\"color:#{$color};$2;\"", $text);
-return "<a $text>";
-}
-add_filter('wp_tag_cloud', 'colorCloud', 1);
-
-//新窗口打开评论里的链接
-function remove_comment_links() {
-global $comment;
-$url = get_comment_author_url();
-$author = get_comment_author();
-if ( empty( $url ) || 'http://' == $url )
-$return = $author;
-else
-$return = "<a href='$url' rel='nofollow' target='_blank'>$author</a>";
-return $return;
-}
-add_filter('get_comment_author_link', 'remove_comment_links');
-remove_filter('comment_text', 'make_clickable', 9);
-
-// 百度ping功能
-function wpyou_baiping($post_id) {
-$baiduXML = 'weblogUpdates.extendedPing' . get_option('blogname') . ' ' . home_url() . ' ' . get_permalink($post_id) . ' ' . get_feed_link() . ' ';
-$wp_http_obj = new WP_Http();
-$return = $wp_http_obj->post('http://ping.baidu.com/ping/RPC2', array('body' => $baiduXML, 'headers' => array('Content-Type' => 'text/xml')));
-if(isset($return['body'])){
-if(strstr($return['body'], '0')){
-$noff_log='succeeded!';
-}
-else{
-$noff_log='failed!';
-}
-}else{
-$noff_log='failed!';
-}
-}
-add_action('publish_post', 'wpyou_baiping');
 
 // 评论回应邮件通知
 function comment_mail_notify($comment_id) {
@@ -274,31 +273,45 @@ $options = array (
 		"type" => "hr",
 	),
 	array(
-		"name" => "版权年份",
+		"name" => "版权年份（页脚）",
 		"id" => $shortname."_years",
 		"type" => "text",
 		"std" => "2017",
 	),
 	array(
-		"name" => "版权公司",
+		"name" => "版权公司（页脚）",
 		"id" => $shortname."_company",
 		"type" => "text",
 		"std" => "产品经理@唐杰",
 	),
 	array(
+		"name" => "统计代码（页脚）",
+		"id" => $shortname."_tongji",
+		"type" => "textarea",
+		"std" => "代码在页面底部，统计标识不会显示，但不影响统计效果"
+	),
+	array(
 		"type" => "hr",
 	),
 	array(
-		"name" => "导航栏色调",
+		"name" => "主题风格色调",
 		"id" => $shortname."_color",
 		"type" => "color",
 		"std" => "#5bc0eb",
+		"explain" => "默认颜色 #5bc0eb | 包括左侧导航栏底色",
+	),
+	array(
+		"name" => "链接二态颜色",
+		"id" => $shortname."_color_hover",
+		"type" => "color",
+		"std" => "#2980b9",
+		"explain" => "默认颜色 #2980b9 | 鼠标放在链接上的颜色",
 	),
 	array(
 		"name" => "头像图片链接",
 		"id" => $shortname."_avatar",
 		"type" => "text",
-		"std" => "https://tangjie.me/wp-content/themes/JieStyle-Two/images/avatar.jpg",
+		"std" => "https://tangjie.me/media/avatar.jpg",
 	),
 	array(
 		"name" => "是否显示微信公众号",
@@ -312,6 +325,16 @@ $options = array (
 		"id" => $shortname."_weixin_img",
 		"type" => "text",
 		"std" => "https://tangjie.me/media/weixin.jpg",
+	),
+	array(
+		"type" => "hr",
+	),
+	array(
+		"name" => "是否显示RSS订阅源",
+		"id" => $shortname."_rss",
+		"type" => "select",
+		"std" => "显示",
+		"options" => array("隐藏", "显示")
 	),
 	array(
 		"type" => "hr",
@@ -430,7 +453,7 @@ function mytheme_admin() {
 <script src="<?php bloginfo('template_directory'); ?>/js/bootstrap.min.js"></script>
 
 <div class="container-fluid">
-	<h2 class="text-primary"><?php echo $themename; ?> Two <a href="https://tangjie.me/jiestyle-two" target="_blank" data-toggle="tooltip" data-placement="bottom" title="点击查看更新"><span class="badge">v2.3</span></a></h2>
+	<h2 class="text-primary"><?php echo $themename; ?> Two <a href="https://tangjie.me/jiestyle-two" target="_blank" data-toggle="tooltip" data-placement="bottom" title="点击查看更新"><span class="badge">v2.3.1</span></a></h2>
 	<hr class="wp-header-end">
 	<hr>
 	<form class="form-horizontal" method="post">
@@ -452,11 +475,11 @@ function mytheme_admin() {
 		<?php } elseif ($value['type'] == "color") { ?>
 		<div class="form-group">
 			<label for="options" class="col-sm-2 control-label"><?php echo $value['name']; ?></label>
-			<div class="col-sm-4">
-				<input name="<?php echo $value['id']; ?>" id="mail-border-color" type="text"  value="<?php if ( get_settings( $value['id'] ) != "") { echo stripslashes(get_settings( $value['id']) ); } else { echo $value['std']; } ?>" />
+			<div class="col-sm-3">
+				<input name="<?php echo $value['id']; ?>" class="mail-border-color" type="text"  value="<?php if ( get_settings( $value['id'] ) != "") { echo stripslashes(get_settings( $value['id']) ); } else { echo $value['std']; } ?>" />
 			</div>
-			<div class="col-sm-4">
-				<p class="form-control-static">默认颜色 #5bc0eb</p>
+			<div class="col-sm-6">
+				<p class="form-control-static"><?php echo $value['explain']; ?></p>
 			</div>
 		</div>
 		<?php } elseif ($value['type'] == "select") { ?>
@@ -496,7 +519,7 @@ $(function() {
 	$('[data-toggle="tooltip"]').tooltip()
 });
 $(function () {
-	$('#mail-border-color').wpColorPicker();
+	$('[class="mail-border-color"]').wpColorPicker();
 });
 </script>
 
