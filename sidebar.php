@@ -1,6 +1,6 @@
 
 <aside class="widget clearfix">
-  <form id="searchform" action="<?php bloginfo('home'); ?>">
+  <form id="searchform" action="<?php bloginfo('siteurl'); ?>">
     <div class="input-group">
       <input type="search" class="form-control" placeholder="搜索…" value="<?php the_search_query(); ?>" name="s">
       <span class="input-group-btn">
