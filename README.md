@@ -28,7 +28,7 @@ WordPress Themes
 * 首发时间：2016-11-20
 * 最新版本：v2.3.1
 * 最后更新：2017-08-05
-* 更新日志：[点击查看](https://github.com/Jarvis-Tang/JieStyle-Two/blob/master/changelog.md)
+* 更新日志：[点击查看](https://github.com/Jarvis-Tang/JieStyle-Two/blob/master/CHANGELOG.md)
 
 ## 主题配置
 * 1、主题设置：后台 -> 外观 -> 主题 -> JieStyle设置
