@@ -1,18 +1,17 @@
 <div class="footer_search visible-xs visible-sm">
-  <form id="searchform" action="<?php bloginfo('siteurl'); ?>">
-    <div class="input-group">
-      <input type="search" class="form-control" placeholder="搜索…" value="<?php the_search_query(); ?>" name="s">
-      <span class="input-group-btn">
-      <button class="btn btn-default" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-      </span> </div>
-  </form>
+	<form id="searchform" action="<?php bloginfo('siteurl'); ?>">
+		<div class="input-group">
+			<input type="search" class="form-control" placeholder="搜索…" value="<?php the_search_query(); ?>" name="s">
+			<span class="input-group-btn"><button class="btn btn-default" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button></span>
+		</div>
+	</form>
 </div>
 <footer id="footer">
-  <div class="copyright">
-    <p><i class="fa fa-copyright" aria-hidden="true"></i> <?php echo get_option('tang_years'); ?> <b><?php echo get_option('tang_company'); ?></b></p>
-    <p>Powered by <b>WordPress</b>. Theme by <a href="https://tangjie.me/jiestyle-two" title="JieStyle Two" target="_blank"><b>JieStyle Two</b></a> | <?php echo get_option( 'zh_cn_l10n_icp_num' );?></p>
-  </div>
-  <div style="display:none;"> <?php echo stripslashes(get_option('tang_tongji')); ?> </div>
+	<div class="copyright">
+		<p><i class="fa fa-copyright" aria-hidden="true"></i> <?php echo get_option('tang_years'); ?> <b><?php echo get_option('tang_company'); ?></b></p>
+		<p>Powered by <b>WordPress</b>. Theme by <a href="https://tangjie.me/jiestyle-two" title="JieStyle Two" target="_blank"><b>JieStyle Two</b></a> | <?php echo get_option( 'zh_cn_l10n_icp_num' );?></p>
+	</div>
+	<div style="display:none;"><?php echo stripslashes(get_option('tang_tongji')); ?></div>
 </footer>
 <script type="text/javascript" src="<?php bloginfo('template_directory'); ?>/js/skel.min.js"></script> 
 <script type="text/javascript" src="<?php bloginfo('template_directory'); ?>/js/util.min.js"></script> 
