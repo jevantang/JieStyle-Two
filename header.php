@@ -80,13 +80,15 @@ wp_head();
 <style type="text/css">
 a{color:<?php echo stripslashes(get_option('tang_color')); ?>}
 a:hover{color:<?php echo stripslashes(get_option('tang_color_hover')); ?>!important}
+#header{background-color:<?php echo stripslashes(get_option('tang_color')); ?>}
 .widget .widget-title::after{background-color:<?php echo stripslashes(get_option('tang_color')); ?>}
 .uptop{border-left-color:<?php echo stripslashes(get_option('tang_color')); ?>}
+#titleBar .toggle:before{background:<?php echo stripslashes(get_option('tang_color')); ?>}
 </style>
 </head>
 
 <body>
-<header id="header" style="background-color:<?php echo stripslashes(get_option('tang_color')); ?>">
+<header id="header">
 	<div class="avatar"><a href="<?php bloginfo('siteurl'); ?>" title="<?php bloginfo('name'); ?>"><img src="<?php echo stripslashes(get_option('tang_avatar')); ?>" alt="<?php bloginfo('name'); ?>" class="img-circle" width="50%"></a></div>
 	<h1 id="name"><?php bloginfo('name'); ?></h1>
 	<div class="sns">
