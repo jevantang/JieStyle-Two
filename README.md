@@ -26,7 +26,7 @@ WordPress Themes
 * 作者博客：[https://tangjie.me](https://tangjie.me)
 * 开源协议：GNU General Public License v3.0
 * 首发时间：2016-11-20
-* 最新版本：v2.3.1
+* 最新版本：v2.3.2
 * 最后更新：2017-08-05
 * 更新日志：[点击查看](https://github.com/Jarvis-Tang/JieStyle-Two/blob/master/CHANGELOG.md)
 
