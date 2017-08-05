@@ -1,9 +1,10 @@
 <?php
 function tangstyle_page_menu_args( $args ) {
-  $args['show_home'] = true;
-  return $args;
+    $args['show_home'] = true;
+    return $args;
 }
 add_filter( 'wp_page_menu_args', 'tangstyle_page_menu_args' );
+
 if ( ! function_exists( 'tangstyle_content_nav' ) ) :
 register_nav_menus(array('header-menu' => __( 'JieStyle导航菜单' ),));
 
@@ -51,22 +52,22 @@ add_filter('rest_jsonp_enabled', '__return_false');
 
 // 禁用Emoji表情
 function disable_emojis() {
- remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
- remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
- remove_action( 'wp_print_styles', 'print_emoji_styles' );
- remove_action( 'admin_print_styles', 'print_emoji_styles' );
- remove_filter( 'the_content_feed', 'wp_staticize_emoji' );
- remove_filter( 'comment_text_rss', 'wp_staticize_emoji' );
- remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
- add_filter( 'tiny_mce_plugins', 'disable_emojis_tinymce' );
+    remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
+    remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
+    remove_action( 'wp_print_styles', 'print_emoji_styles' );
+    remove_action( 'admin_print_styles', 'print_emoji_styles' );
+    remove_filter( 'the_content_feed', 'wp_staticize_emoji' );
+    remove_filter( 'comment_text_rss', 'wp_staticize_emoji' );
+    remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
+    add_filter( 'tiny_mce_plugins', 'disable_emojis_tinymce' );
 }
 add_action( 'init', 'disable_emojis' );
 function disable_emojis_tinymce( $plugins ) {
- if ( is_array( $plugins ) ) {
- return array_diff( $plugins, array( 'wpemoji' ) );
- } else {
- return array();
- }
+    if ( is_array( $plugins ) ) {
+        return array_diff( $plugins, array( 'wpemoji' ) );
+    } else {
+        return array();
+    }
 }
 
 // 移除菜单的多余CSS选择器
@@ -74,7 +75,7 @@ add_filter('nav_menu_css_class', 'my_css_attributes_filter', 100, 1);
 add_filter('nav_menu_item_id', 'my_css_attributes_filter', 100, 1);
 add_filter('page_css_class', 'my_css_attributes_filter', 100, 1);
 function my_css_attributes_filter($var) {
-  return is_array($var) ? array() : '';
+    return is_array($var) ? array() : '';
 }
 
 // 启动友情链接
@@ -82,8 +83,8 @@ add_filter( 'pre_option_link_manager_enabled', '__return_true' );
 
 // 替换Gravatar服务器
 function kratos_get_avatar( $avatar ) {
-$avatar = preg_replace( "/http:\/\/(www|\d).gravatar.com/","https://cn.gravatar.com",$avatar );
-return $avatar;
+    $avatar = preg_replace( "/http:\/\/(www|\d).gravatar.com/","https://cn.gravatar.com",$avatar );
+    return $avatar;
 }
 add_filter( 'get_avatar', 'kratos_get_avatar' );
 
@@ -101,24 +102,24 @@ function tangstyle_get_most_viewed($posts_num=10, $days=180){
 
 // 分页
 function pagination($query_string){
-global $posts_per_page, $paged;
-$my_query = new WP_Query($query_string ."&posts_per_page=-1");
-$total_posts = $my_query->post_count;
-if(empty($paged))$paged = 1;
-$prev = $paged - 1;
-$next = $paged + 1;
-$range = 5; // 分页数设置
-$showitems = ($range * 2)+1;
-$pages = ceil($total_posts/$posts_per_page);
-if(1 != $pages){
-    echo "<ul class='pagination'>";
-    echo ($paged > 2 && $paged+$range+1 > $pages && $showitems < $pages)? "<li><a href='".get_pagenum_link(1)."'><i class='fa fa-angle-double-left' aria-hidden='true'></i></a></li>":"";
-    echo ($paged > 1 && $showitems < $pages)? "<li><a href='".get_pagenum_link($prev)."'><i class='fa fa-angle-left' aria-hidden='true'></i></a></li>":"";
-    for ($i=1; $i <= $pages; $i++){
-    if (1 != $pages &&( !($i >= $paged+$range+1 || $i <= $paged-$range-1) || $pages <= $showitems )){
-    echo ($paged == $i)? "<li class='active'><a href='".get_pagenum_link($i)."'>".$i."<span class='sr-only'>(current)</span></a></li>":"<li><a href='".get_pagenum_link($i)."'>".$i."</a></li>";
-    }
-    }
+    global $posts_per_page, $paged;
+    $my_query = new WP_Query($query_string ."&posts_per_page=-1");
+    $total_posts = $my_query->post_count;
+    if(empty($paged))$paged = 1;
+    $prev = $paged - 1;
+    $next = $paged + 1;
+    $range = 5; // 分页数设置
+    $showitems = ($range * 2)+1;
+    $pages = ceil($total_posts/$posts_per_page);
+    if(1 != $pages){
+        echo "<ul class='pagination'>";
+        echo ($paged > 2 && $paged+$range+1 > $pages && $showitems < $pages)? "<li><a href='".get_pagenum_link(1)."'><i class='fa fa-angle-double-left' aria-hidden='true'></i></a></li>":"";
+        echo ($paged > 1 && $showitems < $pages)? "<li><a href='".get_pagenum_link($prev)."'><i class='fa fa-angle-left' aria-hidden='true'></i></a></li>":"";
+        for ($i=1; $i <= $pages; $i++){
+            if (1 != $pages &&( !($i >= $paged+$range+1 || $i <= $paged-$range-1) || $pages <= $showitems )){
+                echo ($paged == $i)? "<li class='active'><a href='".get_pagenum_link($i)."'>".$i."<span class='sr-only'>(current)</span></a></li>":"<li><a href='".get_pagenum_link($i)."'>".$i."</a></li>";
+            }
+        }
     echo ($paged < $pages && $showitems < $pages) ? "<li><a href='".get_pagenum_link($next)."'><i class='fa fa-angle-right' aria-hidden='true'></i></a></li>" :"";
     echo ($paged < $pages-1 &&  $paged+$range-1 < $pages && $showitems < $pages) ? "<li><a href='".get_pagenum_link($pages)."'><i class='fa fa-angle-double-right' aria-hidden='true'></i></a></li>":"";
     echo "</ul>\n";
@@ -127,47 +128,48 @@ if(1 != $pages){
 
 // 彩色标签云
 function colorCloud($text) {
-$text = preg_replace_callback('|<a (.+?)>|i', 'colorCloudCallback', $text);
-return $text;
+    $text = preg_replace_callback('|<a (.+?)>|i', 'colorCloudCallback', $text);
+    return $text;
 }
 function colorCloudCallback($matches) {
-$text = $matches[1];
-$color = dechex(rand(0,16777215));
-$pattern = '/style=(\'|\")(.*)(\'|\")/i';
-$text = preg_replace($pattern, "style=\"color:#{$color};$2;\"", $text);
-return "<a $text>";
+    $text = $matches[1];
+    $color = dechex(rand(0,16777215));
+    $pattern = '/style=(\'|\")(.*)(\'|\")/i';
+    $text = preg_replace($pattern, "style=\"color:#{$color};$2;\"", $text);
+    return "<a $text>";
 }
 add_filter('wp_tag_cloud', 'colorCloud', 1);
 
 // 新窗口打开评论里的链接 | 加跳转 /go.php?url=
 function remove_comment_links() {
-global $comment;
-$url = get_comment_author_url();
-$author = get_comment_author();
-if ( empty( $url ) || 'http://' == $url )
-$return = $author;
-else
-$return = "<a href='$url' rel='nofollow' target='_blank'>$author</a>";
-return $return;
+    global $comment;
+    $url = get_comment_author_url();
+    $author = get_comment_author();
+    if ( empty( $url ) || 'http://' == $url )
+        $return = $author;
+    else
+        $return = "<a href='$url' rel='nofollow' target='_blank'>$author</a>";
+    return $return;
 }
 add_filter('get_comment_author_link', 'remove_comment_links');
 remove_filter('comment_text', 'make_clickable', 9);
 
 // 百度ping功能
 function wpyou_baiping($post_id) {
-$baiduXML = 'weblogUpdates.extendedPing' . get_option('blogname') . ' ' . home_url() . ' ' . get_permalink($post_id) . ' ' . get_feed_link() . ' ';
-$wp_http_obj = new WP_Http();
-$return = $wp_http_obj->post('http://ping.baidu.com/ping/RPC2', array('body' => $baiduXML, 'headers' => array('Content-Type' => 'text/xml')));
-if(isset($return['body'])){
-if(strstr($return['body'], '0')){
-$noff_log='succeeded!';
-}
-else{
-$noff_log='failed!';
-}
-}else{
-$noff_log='failed!';
-}
+    $baiduXML = 'weblogUpdates.extendedPing' . get_option('blogname') . ' ' . home_url() . ' ' . get_permalink($post_id) . ' ' . get_feed_link() . ' ';
+    $wp_http_obj = new WP_Http();
+    $return = $wp_http_obj->post('http://ping.baidu.com/ping/RPC2', array('body' => $baiduXML, 'headers' => array('Content-Type' => 'text/xml')));
+    if(isset($return['body'])){
+        if(strstr($return['body'], '0')){
+            $noff_log='succeeded!';
+        }
+        else{
+            $noff_log='failed!';
+        }
+    }
+    else{
+        $noff_log='failed!';
+    }
 }
 add_action('publish_post', 'wpyou_baiping');
 
@@ -177,65 +179,62 @@ function tangstyle_comment( $comment, $args, $depth ) {
     switch ( $comment->comment_type ) :
         case 'pingback' :
         case 'trackback' :
-    ?>
+?>
 <li id="comment-<?php comment_ID(); ?>" class="comment_li">
     <?php _e( 'Pingback:', 'tangstyle' ); ?>
     <?php comment_author_link(); ?>
     <?php edit_comment_link( __( '(Edit)', 'tangstyle' ), '<span class="edit-link">', '</span>' ); ?>
 <?php
-  break;
-  default :
-  global $post;
+    break;
+    default :
+    global $post;
 ?>
 <li id="comment-li-<?php comment_ID(); ?>" class="comment_li">
-  <div id="comment-<?php comment_ID(); ?>">
-    <div class="comment_top clearfix">
-      <div class="comment_avatar"><?php echo get_avatar( $comment, 40 );?></div>
-      <div class="pull-left">
-        <p class="comment_author"><?php printf(__('%s'), get_comment_author_link()) ?></p>
-        <p class="comment_time"><?php printf( __('%1$s at %2$s'), get_comment_date(),  get_comment_time()) ?></p>
-      </div>
-      <div class="pull-right"><?php comment_reply_link( array_merge( $args, array( 'reply_text' => __( '回复TA', 'tangstyle' ), 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ) ); ?> <?php edit_comment_link( __( '编辑', 'tangstyle' ), '<span class="edit_link">', '</span>' ); ?></div>
+    <div id="comment-<?php comment_ID(); ?>">
+        <div class="comment_top clearfix">
+            <div class="comment_avatar"><?php echo get_avatar( $comment, 40 );?></div>
+            <div class="pull-left">
+                <p class="comment_author"><?php printf(__('%s'), get_comment_author_link()) ?></p>
+                <p class="comment_time"><?php printf( __('%1$s at %2$s'), get_comment_date(),  get_comment_time()) ?></p>
+            </div>
+            <div class="pull-right"><?php comment_reply_link( array_merge( $args, array( 'reply_text' => __( '回复TA', 'tangstyle' ), 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ) ); ?> <?php edit_comment_link( __( '编辑', 'tangstyle' ), '<span class="edit_link">', '</span>' ); ?></div>
+        </div>
+        <div class="comment_text"><?php comment_text(); ?></div>
+        <?php if ( '0' == $comment->comment_approved ) : ?>
+        <p style="color:#F00;"><?php _e( '您的评论正在等待审核。', 'tangstyle' ); ?></p>
+        <?php endif; ?>
     </div>
-    <div class="comment_text"><?php comment_text(); ?></div>
-    <?php if ( '0' == $comment->comment_approved ) : ?>
-    <p style="color:#F00;"><?php _e( '您的评论正在等待审核。', 'tangstyle' ); ?></p>
-    <?php endif; ?>
-  </div>
 <?php
-  break;
-  endswitch;
+    break;
+    endswitch;
 }
 endif;
 
 // 评论回应邮件通知
 function comment_mail_notify($comment_id) {
-  $admin_email = get_bloginfo ('admin_email'); // $admin_email 可改为你指定的 e-mail.
-  $comment = get_comment($comment_id);
-  $comment_author_email = trim($comment->comment_author_email);
-  $parent_id = $comment->comment_parent ? $comment->comment_parent : '';
-  $to = $parent_id ? trim(get_comment($parent_id)->comment_author_email) : '';
-  $spam_confirmed = $comment->comment_approved;
-  if (($parent_id != '') && ($spam_confirmed != 'spam') && ($to != $admin_email) && ($comment_author_email == $admin_email)) {
-    $wp_email = 'no-reply@' . preg_replace('#^www\.#', '', strtolower($_SERVER['SERVER_NAME'])); // no-reply 可改为可用的 e-mail.
-    $subject = '您在 [' . get_option("blogname") . '] 的评论有新的回复';
-    $message = '
-    <div style="background-color:#eef2fa; border:1px solid #d8e3e8; color:#111; padding:0 15px; -moz-border-radius:5px; -webkit-border-radius:5px; -khtml-border-radius:5px; border-radius:5px;">
-      <p>' . trim(get_comment($parent_id)->comment_author) . ', 您好!</p>
-      <p>您曾在 [' . get_option("blogname") . '] 的文章 《' . get_the_title($comment->comment_post_ID) . '》 上发表评论:<br />'
-       . nl2br(get_comment($parent_id)->comment_content) . '</p>
-      <p>' . trim($comment->comment_author) . ' 给您的回复如下:<br />'
-       . nl2br($comment->comment_content) . '<br /></p>
-      <p>您可以点击 <a href="' . htmlspecialchars(get_comment_link($parent_id)) . '">查看回复的完整內容</a></p>
-      <p>欢迎再次光临 <a href="' . get_option('home') . '">' . get_option('blogname') . '</a></p>
-      <p>(此邮件由系统自动发出,请勿直接回复.)</p>
-    </div>';
-    $message = convert_smilies($message);
-    $from = "From: \"" . get_option('blogname') . "\" <$wp_email>";
-    $headers = "$from\nContent-Type: text/html; charset=" . get_option('blog_charset') . "\n";
-    wp_mail( $to, $subject, $message, $headers );
-    //echo 'mail to ', $to, '<br/> ' , $subject, $message; // for testing
-  }
+    $admin_email = get_bloginfo ('admin_email'); // $admin_email 可改为你指定的 e-mail.
+    $comment = get_comment($comment_id);
+    $comment_author_email = trim($comment->comment_author_email);
+    $parent_id = $comment->comment_parent ? $comment->comment_parent : '';
+    $to = $parent_id ? trim(get_comment($parent_id)->comment_author_email) : '';
+    $spam_confirmed = $comment->comment_approved;
+    if (($parent_id != '') && ($spam_confirmed != 'spam') && ($to != $admin_email) && ($comment_author_email == $admin_email)) {
+        $wp_email = 'no-reply@' . preg_replace('#^www\.#', '', strtolower($_SERVER['SERVER_NAME'])); // no-reply 可改为可用的 e-mail.
+        $subject = '您在 [' . get_option("blogname") . '] 的评论有新的回复';
+        $message = '
+        <div style="background-color:#eef2fa; border:1px solid #d8e3e8; color:#111; padding:0 15px; -moz-border-radius:5px; -webkit-border-radius:5px; -khtml-border-radius:5px; border-radius:5px;">
+            <p>' . trim(get_comment($parent_id)->comment_author) . ', 您好!</p>
+            <p>您曾在 [' . get_option("blogname") . '] 的文章 《' . get_the_title($comment->comment_post_ID) . '》 上发表评论:<br />' . nl2br(get_comment($parent_id)->comment_content) . '</p>
+            <p>' . trim($comment->comment_author) . ' 给您的回复如下:<br />' . nl2br($comment->comment_content) . '<br /></p>
+            <p>您可以点击 <a href="' . htmlspecialchars(get_comment_link($parent_id)) . '">查看回复的完整內容</a></p>
+            <p>欢迎再次光临 <a href="' . get_option('home') . '">' . get_option('blogname') . '</a></p>
+            <p>(此邮件由系统自动发出,请勿直接回复.)</p>
+        </div>';
+        $message = convert_smilies($message);
+        $from = "From: \"" . get_option('blogname') . "\" <$wp_email>";
+        $headers = "$from\nContent-Type: text/html; charset=" . get_option('blog_charset') . "\n";
+        wp_mail( $to, $subject, $message, $headers );
+    }
 }
 add_action('comment_post', 'comment_mail_notify');
 
@@ -247,6 +246,7 @@ function color_picker_assets() {
 add_action( 'admin_enqueue_scripts', 'color_picker_assets' );
 
 ?>
+
 <?php
 $themename = "JieStyle";
 $shortname = "tang";
