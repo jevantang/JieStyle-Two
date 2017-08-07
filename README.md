@@ -14,7 +14,7 @@ WordPress Themes
 * 采用图标字体库 Font Awesome v4.7.0
 * 支持主题控制面板，后台方便的设置SEO、统计代码
 * 针对 SEO 进行改良，支持内页自动获取关键字、描述，支持自动推送到百度
-* 本主题禁止了“修订版本”和“自动草稿”的功能
+* 本主题禁止了“修订版本”功能
 * 支持 WordPress 的菜单系统，无限级下拉菜单（支持菜单鼠标悬停下拉功能）
 * 支持无限嵌套评论
 * 支持 Gravatar 头像显示，替换成了中国境内路径
@@ -26,8 +26,8 @@ WordPress Themes
 * 作者博客：[https://tangjie.me](https://tangjie.me)
 * 开源协议：GNU General Public License v3.0
 * 首发时间：2016-11-20
-* 最新版本：v2.3.2
-* 最后更新：2017-08-05
+* 最新版本：v2.3.3
+* 最后更新：2017-08-07
 * 更新日志：[点击查看](https://github.com/Jarvis-Tang/JieStyle-Two/blob/master/CHANGELOG.md)
 
 ## 主题配置
