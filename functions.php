@@ -1,4 +1,14 @@
 <?php
+/*
+Theme Name: JieStyle Two
+Theme URI: https://tangjie.me/jiestyle-two
+Author: Jarvis Tang
+Author URI: https://tangjie.me/
+Description: A responsible theme for WordPress.
+Version: 2.3.3
+License: GNU General Public License v3.0
+*/
+
 function tangstyle_page_menu_args( $args ) {
     $args['show_home'] = true;
     return $args;
@@ -72,15 +82,15 @@ function my_css_attributes_filter($var) {
     return is_array($var) ? array() : '';
 }
 
-//启动友情链接
-add_filter( 'pre_option_link_manager_enabled', '__return_true' );
-
 //替换Gravatar服务器
 function kratos_get_avatar( $avatar ) {
     $avatar = preg_replace( "/http:\/\/(www|\d).gravatar.com/","https://cn.gravatar.com",$avatar );
     return $avatar;
 }
 add_filter( 'get_avatar', 'kratos_get_avatar' );
+
+//启动友情链接
+add_filter( 'pre_option_link_manager_enabled', '__return_true' );
 
 //获得热评文章
 function tangstyle_get_most_viewed($posts_num=10, $days=180){
@@ -93,6 +103,36 @@ function tangstyle_get_most_viewed($posts_num=10, $days=180){
     }
     echo $output;
 }
+
+//彩色标签云
+function colorCloud($text) {
+    $text = preg_replace_callback('|<a (.+?)>|i', 'colorCloudCallback', $text);
+    return $text;
+}
+function colorCloudCallback($matches) {
+    $text = $matches[1];
+    $color = dechex(rand(0,16777215));
+    $pattern = '/style=(\'|\")(.*)(\'|\")/i';
+    $text = preg_replace($pattern, "style=\"color:#{$color};$2;\"", $text);
+    return "<a $text>";
+}
+add_filter('wp_tag_cloud', 'colorCloud', 1);
+
+//新窗口打开评论里的链接
+function remove_comment_links() {
+    global $comment;
+    $url = get_comment_author_url();
+    $author = get_comment_author();
+    if ( empty( $url ) || 'http://' == $url )
+        $return = $author;
+    else
+        $return = "<a href='$url' rel='nofollow' target='_blank'>$author</a>";
+        // 带跳转路径，必须根目录有 go.php 解析文件
+        // $return = "<a href='/go.php?url=$url' rel='nofollow' target='_blank'>$author</a>";
+    return $return;
+}
+add_filter('get_comment_author_link', 'remove_comment_links');
+remove_filter('comment_text', 'make_clickable', 9);
 
 //分页
 function pagination($query_string){
@@ -120,62 +160,51 @@ function pagination($query_string){
     }
 }
 
-//彩色标签云
-function colorCloud($text) {
-    $text = preg_replace_callback('|<a (.+?)>|i', 'colorCloudCallback', $text);
-    return $text;
-}
-function colorCloudCallback($matches) {
-    $text = $matches[1];
-    $color = dechex(rand(0,16777215));
-    $pattern = '/style=(\'|\")(.*)(\'|\")/i';
-    $text = preg_replace($pattern, "style=\"color:#{$color};$2;\"", $text);
-    return "<a $text>";
-}
-add_filter('wp_tag_cloud', 'colorCloud', 1);
+//颜色选择器
+function color_picker_assets() {
+    wp_enqueue_style( 'wp-color-picker' );
+    wp_enqueue_script( 'my-color-picker-handle' );
+    wp_enqueue_script( 'wp-color-picker' );
+};
+add_action( 'admin_enqueue_scripts', 'color_picker_assets' );
 
-//新窗口打开评论里的链接
-function remove_comment_links() {
-    global $comment;
-    $url = get_comment_author_url();
-    $author = get_comment_author();
-    if ( empty( $url ) || 'http://' == $url )
-        $return = $author;
-    else
-        $return = "<a href='$url' rel='nofollow' target='_blank'>$author</a>";
-        /* 带跳转路径
-        $return = "<a href='/go.php?url=$url' rel='nofollow' target='_blank'>$author</a>";
-        */
-    return $return;
-}
-add_filter('get_comment_author_link', 'remove_comment_links');
-remove_filter('comment_text', 'make_clickable', 9);
-
-//百度ping功能
-function wpyou_baiping($post_id) {
-    $baiduXML = 'weblogUpdates.extendedPing' . get_option('blogname') . ' ' . home_url() . ' ' . get_permalink($post_id) . ' ' . get_feed_link() . ' ';
-    $wp_http_obj = new WP_Http();
-    $return = $wp_http_obj->post('http://ping.baidu.com/ping/RPC2', array('body' => $baiduXML, 'headers' => array('Content-Type' => 'text/xml')));
-    if(isset($return['body'])){
-        if(strstr($return['body'], '0')){
-            $noff_log='succeeded!';
-        }
-        else{
-            $noff_log='failed!';
-        }
-    }
-    else{
-        $noff_log='failed!';
+// 评论回应邮件通知
+function comment_mail_notify($comment_id) {
+    $admin_email = get_bloginfo ('admin_email'); // $admin_email 可改为你指定的 e-mail.
+    $comment = get_comment($comment_id);
+    $comment_author_email = trim($comment->comment_author_email);
+    $parent_id = $comment->comment_parent ? $comment->comment_parent : '';
+    $to = $parent_id ? trim(get_comment($parent_id)->comment_author_email) : '';
+    $spam_confirmed = $comment->comment_approved;
+    if (($parent_id != '') && ($spam_confirmed != 'spam') && ($to != $admin_email) && ($comment_author_email == $admin_email)) {
+        $wp_email = 'no-reply@' . preg_replace('#^www\.#', '', strtolower($_SERVER['SERVER_NAME'])); // no-reply 可改为可用的 e-mail.
+        $subject = '您在 [' . get_option("blogname") . '] 的评论有新的回复';
+        $message = '
+<div style="background-color:#eef2fa; border:1px solid #d8e3e8; color:#111; padding:0 15px; -moz-border-radius:5px; -webkit-border-radius:5px; -khtml-border-radius:5px; border-radius:5px;">
+    <p>' . trim(get_comment($parent_id)->comment_author) . ', 您好!</p>
+    <p>您曾在 [' . get_option("blogname") . '] 的文章 《' . get_the_title($comment->comment_post_ID) . '》 上发表评论:<br />'
+    . nl2br(get_comment($parent_id)->comment_content) . '</p>
+    <p>' . trim($comment->comment_author) . ' 给您的回复如下:<br />'
+    . nl2br($comment->comment_content) . '<br /></p>
+    <p>您可以点击 <a href="' . htmlspecialchars(get_comment_link($parent_id)) . '">查看回复的完整內容</a></p>
+    <p>欢迎再次光临 <a href="' . get_option('home') . '">' . get_option('blogname') . '</a></p>
+    <p>(此邮件由系统自动发出,请勿直接回复.)</p>
+</div>';
+        $message = convert_smilies($message);
+        $from = "From: \"" . get_option('blogname') . "\" <$wp_email>";
+        $headers = "$from\nContent-Type: text/html; charset=" . get_option('blog_charset') . "\n";
+        wp_mail( $to, $subject, $message, $headers );
+    //echo 'mail to ', $to, '<br/> ' , $subject, $message; // for testing
     }
 }
-add_action('publish_post', 'wpyou_baiping');
+add_action('comment_post', 'comment_mail_notify');
 
-//评论模板
+//评论模板 Start
 function tangstyle_comment( $comment, $args, $depth ) {
     $GLOBALS['comment'] = $comment;
     switch ( $comment->comment_type ) :
-        case 'pingback' :
-        case 'trackback' :
+    case 'pingback' :
+    case 'trackback' :
 ?>
 <li id="comment-<?php comment_ID(); ?>" class="comment_li">
     <?php _e( 'Pingback:', 'tangstyle' ); ?>
@@ -206,42 +235,7 @@ function tangstyle_comment( $comment, $args, $depth ) {
     endswitch;
 }
 endif;
-
-//评论回应邮件通知
-function comment_mail_notify($comment_id) {
-    $admin_email = get_bloginfo ('admin_email'); // $admin_email 可改为你指定的 e-mail.
-    $comment = get_comment($comment_id);
-    $comment_author_email = trim($comment->comment_author_email);
-    $parent_id = $comment->comment_parent ? $comment->comment_parent : '';
-    $to = $parent_id ? trim(get_comment($parent_id)->comment_author_email) : '';
-    $spam_confirmed = $comment->comment_approved;
-    if (($parent_id != '') && ($spam_confirmed != 'spam') && ($to != $admin_email) && ($comment_author_email == $admin_email)) {
-        $wp_email = 'no-reply@' . preg_replace('#^www\.#', '', strtolower($_SERVER['SERVER_NAME'])); // no-reply 可改为可用的 e-mail.
-        $subject = '您在 [' . get_option("blogname") . '] 的评论有新的回复';
-        $message = '
-        <div style="background-color:#eef2fa; border:1px solid #d8e3e8; color:#111; padding:0 15px; -moz-border-radius:5px; -webkit-border-radius:5px; -khtml-border-radius:5px; border-radius:5px;">
-            <p>' . trim(get_comment($parent_id)->comment_author) . ', 您好!</p>
-            <p>您曾在 [' . get_option("blogname") . '] 的文章 《' . get_the_title($comment->comment_post_ID) . '》 上发表评论:<br />' . nl2br(get_comment($parent_id)->comment_content) . '</p>
-            <p>' . trim($comment->comment_author) . ' 给您的回复如下:<br />' . nl2br($comment->comment_content) . '<br /></p>
-            <p>您可以点击 <a href="' . htmlspecialchars(get_comment_link($parent_id)) . '">查看回复的完整內容</a></p>
-            <p>欢迎再次光临 <a href="' . get_option('home') . '">' . get_option('blogname') . '</a></p>
-            <p>(此邮件由系统自动发出,请勿直接回复.)</p>
-        </div>';
-        $message = convert_smilies($message);
-        $from = "From: \"" . get_option('blogname') . "\" <$wp_email>";
-        $headers = "$from\nContent-Type: text/html; charset=" . get_option('blog_charset') . "\n";
-        wp_mail( $to, $subject, $message, $headers );
-    }
-}
-add_action('comment_post', 'comment_mail_notify');
-
-//颜色选择器
-function color_picker_assets() {
-    wp_enqueue_style( 'wp-color-picker' );
-    wp_enqueue_script( 'my-color-picker-handle' );
-    wp_enqueue_script( 'wp-color-picker' );
-};
-add_action( 'admin_enqueue_scripts', 'color_picker_assets' );
+//评论模板 End
 
 ?>
 
@@ -419,6 +413,7 @@ $options = array (
         "std" => "https://tangjie.me/media/WeixinPay.png",
     ),
 );
+
 function mytheme_add_admin() {
     global $themename, $shortname, $options;
     if ( $_GET['page'] == basename(__FILE__) ) {
@@ -440,6 +435,7 @@ function mytheme_add_admin() {
     }
     add_theme_page($themename." 设置", "$themename 设置", 'edit_themes', basename(__FILE__), 'mytheme_admin');
 }
+
 function mytheme_admin() {
     global $themename, $shortname, $options;
     if ( $_REQUEST['saved'] ) echo '<div id="message" class="updated notice is-dismissible"><p>'.$themename.' 设置已保存。</p></div>';
@@ -472,7 +468,7 @@ function mytheme_admin() {
         <div class="form-group">
             <label for="options" class="col-sm-2 control-label"><?php echo $value['name']; ?></label>
             <div class="col-sm-3">
-                <input name="<?php echo $value['id']; ?>" class="mail-border-color" type="text"  value="<?php if ( get_settings( $value['id'] ) != "") { echo stripslashes(get_settings( $value['id']) ); } else { echo $value['std']; } ?>" />
+                <input name="<?php echo $value['id']; ?>" class="input-color" type="text"  value="<?php if ( get_settings( $value['id'] ) != "") { echo stripslashes(get_settings( $value['id']) ); } else { echo $value['std']; } ?>" />
             </div>
             <div class="col-sm-6">
                 <p class="form-control-static"><?php echo $value['explain']; ?></p>
@@ -516,7 +512,7 @@ $(function() {
     $('[data-toggle="tooltip"]').tooltip()
 });
 $(function () {
-    $('[class="mail-border-color"]').wpColorPicker();
+    $('[class="input-color"]').wpColorPicker();
 });
 </script>
 
