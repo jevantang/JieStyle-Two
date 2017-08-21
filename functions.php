@@ -5,7 +5,7 @@ Theme URI: https://tangjie.me/jiestyle-two
 Author: Jarvis Tang
 Author URI: https://tangjie.me/
 Description: A responsible theme for WordPress.
-Version: 2.3.3
+Version: 2.3.4
 License: GNU General Public License v3.0
 */
 
@@ -127,8 +127,8 @@ function remove_comment_links() {
         $return = $author;
     else
         $return = "<a href='$url' rel='nofollow' target='_blank'>$author</a>";
-        // 带跳转路径，必须根目录有 go.php 解析文件
-        // $return = "<a href='/go.php?url=$url' rel='nofollow' target='_blank'>$author</a>";
+        //带跳转路径，必须根目录有 go.php 解析文件
+        //$return = "<a href='/go.php?url=$url' rel='nofollow' target='_blank'>$author</a>";
     return $return;
 }
 add_filter('get_comment_author_link', 'remove_comment_links');
@@ -160,46 +160,7 @@ function pagination($query_string){
     }
 }
 
-//颜色选择器
-function color_picker_assets() {
-    wp_enqueue_style( 'wp-color-picker' );
-    wp_enqueue_script( 'my-color-picker-handle' );
-    wp_enqueue_script( 'wp-color-picker' );
-};
-add_action( 'admin_enqueue_scripts', 'color_picker_assets' );
-
-// 评论回应邮件通知
-function comment_mail_notify($comment_id) {
-    $admin_email = get_bloginfo ('admin_email'); // $admin_email 可改为你指定的 e-mail.
-    $comment = get_comment($comment_id);
-    $comment_author_email = trim($comment->comment_author_email);
-    $parent_id = $comment->comment_parent ? $comment->comment_parent : '';
-    $to = $parent_id ? trim(get_comment($parent_id)->comment_author_email) : '';
-    $spam_confirmed = $comment->comment_approved;
-    if (($parent_id != '') && ($spam_confirmed != 'spam') && ($to != $admin_email) && ($comment_author_email == $admin_email)) {
-        $wp_email = 'no-reply@' . preg_replace('#^www\.#', '', strtolower($_SERVER['SERVER_NAME'])); // no-reply 可改为可用的 e-mail.
-        $subject = '您在 [' . get_option("blogname") . '] 的评论有新的回复';
-        $message = '
-<div style="background-color:#eef2fa; border:1px solid #d8e3e8; color:#111; padding:0 15px; -moz-border-radius:5px; -webkit-border-radius:5px; -khtml-border-radius:5px; border-radius:5px;">
-    <p>' . trim(get_comment($parent_id)->comment_author) . ', 您好!</p>
-    <p>您曾在 [' . get_option("blogname") . '] 的文章 《' . get_the_title($comment->comment_post_ID) . '》 上发表评论:<br />'
-    . nl2br(get_comment($parent_id)->comment_content) . '</p>
-    <p>' . trim($comment->comment_author) . ' 给您的回复如下:<br />'
-    . nl2br($comment->comment_content) . '<br /></p>
-    <p>您可以点击 <a href="' . htmlspecialchars(get_comment_link($parent_id)) . '">查看回复的完整內容</a></p>
-    <p>欢迎再次光临 <a href="' . get_option('home') . '">' . get_option('blogname') . '</a></p>
-    <p>(此邮件由系统自动发出,请勿直接回复.)</p>
-</div>';
-        $message = convert_smilies($message);
-        $from = "From: \"" . get_option('blogname') . "\" <$wp_email>";
-        $headers = "$from\nContent-Type: text/html; charset=" . get_option('blog_charset') . "\n";
-        wp_mail( $to, $subject, $message, $headers );
-    //echo 'mail to ', $to, '<br/> ' , $subject, $message; // for testing
-    }
-}
-add_action('comment_post', 'comment_mail_notify');
-
-//评论模板 Start
+//评论模板
 function tangstyle_comment( $comment, $args, $depth ) {
     $GLOBALS['comment'] = $comment;
     switch ( $comment->comment_type ) :
@@ -235,7 +196,14 @@ function tangstyle_comment( $comment, $args, $depth ) {
     endswitch;
 }
 endif;
-//评论模板 End
+
+//颜色选择器
+function color_picker_assets() {
+    wp_enqueue_style( 'wp-color-picker' );
+    wp_enqueue_script( 'my-color-picker-handle' );
+    wp_enqueue_script( 'wp-color-picker' );
+};
+add_action( 'admin_enqueue_scripts', 'color_picker_assets' );
 
 ?>
 
@@ -445,7 +413,7 @@ function mytheme_admin() {
 <link rel="stylesheet" href="<?php bloginfo('template_directory'); ?>/css/bootstrap.min.css">
 
 <div class="container-fluid">
-    <h2 class="text-primary"><?php echo $themename; ?> Two <a href="https://tangjie.me/jiestyle-two" target="_blank" data-toggle="tooltip" data-placement="bottom" title="点击查看更新"><span class="badge">v2.3.3</span></a></h2>
+    <h2 class="text-primary"><?php echo $themename; ?> Two <a href="https://tangjie.me/jiestyle-two" target="_blank" data-toggle="tooltip" data-placement="bottom" title="点击查看更新"><span class="badge">v2.3.4</span></a></h2>
     <hr class="wp-header-end">
     <hr>
     <form class="form-horizontal" method="post">
