@@ -15,6 +15,7 @@
                         <span class="meta-span"><i class="fa fa-folder-open-o"></i> <?php the_category(',') ?></span>
                         <span class="meta-span"><i class="fa fa-commenting-o"></i> <?php comments_popup_link ('没有评论','1条评论','%条评论'); ?></span>
                         <span class="meta-span hidden-xs"><i class="fa fa-tags" aria-hidden="true"></i> <?php the_tags('',',',''); ?></span>
+                        阅读：<?php post_views(' ', ' 次'); ?>
                     </div>
                 </header>
                 <div class="post-content clearfix">
