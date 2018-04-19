@@ -35,6 +35,12 @@ $(function() {
     var s = document.getElementsByTagName("script")[0];
     s.parentNode.insertBefore(bp, s);
 })();
+$('.archives ul.archives-monthlisting').hide();
+$('.archives ul.archives-monthlisting:first').show();
+$('.archives .m-title').click(function() {
+    $(this).next().slideToggle('fast');
+    return false;
+});
 </script>
 </body>
 </html>
