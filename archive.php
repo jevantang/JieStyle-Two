@@ -1,39 +1,42 @@
+<?php /*Template Name:Archive*/ ?>
 <?php get_header(); ?>
+
 
 <div id="main">
     <div class="row box">
-        <div class="col-md-8">
-            <?php if ( is_day() ) : ?>
-            <h3 class="uptop"><i class="fa fa-calendar" aria-hidden="true"></i> <?php printf(__('日期浏览: %s'), get_the_date('Y年n月j日 D') ); ?></h3>
-            <?php elseif ( is_month() ) : ?>
-            <h3 class="uptop"><i class="fa fa-calendar" aria-hidden="true"></i> <?php printf(__('日期浏览: %s'), get_the_date('Y年M') ); ?></h3>
-            <?php elseif ( is_year() ) : ?>
-            <h3 class="uptop"><i class="fa fa-calendar" aria-hidden="true"></i> <?php printf(__('日期浏览: %s'), get_the_date('Y年') ); ?></h3>
-            <?php elseif ( is_tag() ) : ?>
-            <h3 class="uptop"><i class="fa fa-tags" aria-hidden="true"></i> <?php printf(__('Tag: %s'), single_tag_title('', false ) ); ?></h3>
-            <?php else : ?>
-            <h3 class="uptop"><?php _e( 'Blog Archives' ); ?></h3>
-            <?php endif; ?>
-
-            <?php while ( have_posts() ) : the_post(); ?>
-            <article class="article-list-2 clearfix">
-                <div class="post-time"><i class="fa fa-calendar"></i> <?php the_time('m月d日') ?></div>
-                <h1 class="post-title"><a href="<?php the_permalink() ?>"><?php the_title(); ?></a></h1>
-                <div class="post-meta">
-                    <span class="meta-span"><i class="fa fa-folder-open-o"></i> <?php the_category(',') ?></span>
-                    <span class="meta-span"><i class="fa fa-commenting-o"></i> <?php comments_popup_link ('没有评论','1条评论','%条评论'); ?></span>
-                    <span class="meta-span hidden-xs"><i class="fa fa-tags" aria-hidden="true"></i> <?php the_tags('',',',''); ?></span>
-                </div>
-            </article>
-            <?php endwhile; ?>
-            <nav style="float:right">
-                <?php pagination($query_string); ?>
-            </nav>
-        </div>
+        <div class="col-md-8 archives">
+<?php
+    $previous_year = $year = 0;
+    $previous_month = $month = 0;
+    $ul_open = false;
+    $myposts = get_posts('numberposts=-1&orderby=post_date&order=DESC');
+        foreach ($myposts as $post) :
+            setup_postdata($post);
+            $year = mysql2date('Y', $post->post_date);
+            $month = mysql2date(‘n’, $post->post_date);
+            $day = mysql2date('j', $post->post_date);
+            if ($year != $previous_year || $month != $previous_month) :
+                if ($ul_open == true) :
+                    echo '</ul>';
+                endif;
+                    echo '<h4 class="m-title">'; echo the_time('Y-m'); echo '</h4>';
+                    echo '<ul class="archives-monthlisting">';
+                $ul_open = true;
+            endif;
+            $previous_year = $year; $previous_month = $month;
+?>
+    <li>
+        <a href="<?php the_permalink(); ?>"><span><?php the_time('Y-m-j'); ?></span>
+        <div class="atitle"><?php the_title(); ?></div></a>
+    </li>
+<?php endforeach; ?>
+    </ul>
+    </div>
         <div class="col-md-4 hidden-xs hidden-sm">
             <?php get_sidebar(); ?>
         </div>
     </div>
 </div>
 
-<?php get_footer(); ?>
+<?php get_footer(); ?> 
+

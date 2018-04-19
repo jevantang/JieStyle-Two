@@ -3,7 +3,9 @@
 <div id="main">
     <div class="row box">
         <div class="col-md-8">
+        <?php $posts = query_posts($query_string . '&orderby=date&showposts='.get_option('tang_count')); ?>
         <?php while ( have_posts() ) : the_post(); ?>
+            <!-- 如果是置顶-->
             <?php if ( is_sticky() ) : ?>
             <h2 class="uptop"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i> <a href="<?php the_permalink() ?>" target="_blank"><?php the_title(); ?></a></h2>
             <?php else : ?>
@@ -15,6 +17,7 @@
                         <span class="meta-span"><i class="fa fa-folder-open-o"></i> <?php the_category(',') ?></span>
                         <span class="meta-span"><i class="fa fa-commenting-o"></i> <?php comments_popup_link ('没有评论','1条评论','%条评论'); ?></span>
                         <span class="meta-span hidden-xs"><i class="fa fa-tags" aria-hidden="true"></i> <?php the_tags('',',',''); ?></span>
+                        <span class="meta-span"><i class="fa fa-eye"></i><?php post_views(' ', ' 次'); ?></span>
                     </div>
                 </header>
                 <div class="post-content clearfix">
