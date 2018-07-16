@@ -1,5 +1,4 @@
 <?php get_header(); ?>
-
 <div id="main">
     <div class="row box">
         <div class="col-md-8">
@@ -29,5 +28,4 @@
         </div>
     </div>
 </div>
-
 <?php get_footer(); ?>

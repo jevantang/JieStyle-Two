@@ -3,7 +3,6 @@ if ( post_password_required() )
     return;
 ?>
 <?php if ( have_comments() ) : ?>
-
 <div class="comment-head clearfix">
     <div class="pull-left"><?php comments_number(__('没有评论','1条评论','%条评论'));?></div>
     <div class="pull-right"><a href="#respond"><i class="fa fa-pencil"></i> 添加新评论</a></div>

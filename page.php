@@ -1,5 +1,4 @@
 <?php get_header(); ?>
-
 <div id="main">
 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
     <article class="col-md-8 col-md-offset-2 view clearfix">
@@ -14,5 +13,4 @@
 <?php endwhile; else: ?>
 <?php endif; ?>
 </div>
-
 <?php get_footer(); ?>

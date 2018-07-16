@@ -5,10 +5,9 @@ Theme URI: https://tangjie.me/jiestyle-two
 Author: Jarvis Tang
 Author URI: https://tangjie.me/
 Description: A responsible theme for WordPress.
-Version: 2.3.4
+Version: 2.3.5
 License: GNU General Public License v3.0
 */
-
 function tangstyle_page_menu_args( $args ) {
     $args['show_home'] = true;
     return $args;
@@ -204,9 +203,7 @@ function color_picker_assets() {
     wp_enqueue_script( 'wp-color-picker' );
 };
 add_action( 'admin_enqueue_scripts', 'color_picker_assets' );
-
 ?>
-
 <?php
 $themename = "JieStyle";
 $shortname = "tang";
@@ -407,13 +404,10 @@ function mytheme_add_admin() {
 function mytheme_admin() {
     global $themename, $shortname, $options;
     if ( $_REQUEST['saved'] ) echo '<div id="message" class="updated notice is-dismissible"><p>'.$themename.' 设置已保存。</p></div>';
-
 ?>
-
 <link rel="stylesheet" href="<?php bloginfo('template_directory'); ?>/css/bootstrap.min.css">
-
 <div class="container-fluid">
-    <h2 class="text-primary"><?php echo $themename; ?> Two <a href="https://tangjie.me/jiestyle-two" target="_blank" data-toggle="tooltip" data-placement="bottom" title="点击查看更新"><span class="badge">v2.3.4</span></a></h2>
+    <h2 class="text-primary"><?php echo $themename; ?> Two <a href="https://tangjie.me/jiestyle-two" target="_blank" data-toggle="tooltip" data-placement="bottom" title="点击查看更新"><span class="badge">v2.3.5</span></a></h2>
     <hr class="wp-header-end">
     <hr>
     <form class="form-horizontal" method="post">
@@ -462,7 +456,7 @@ function mytheme_admin() {
             </div>
         </div>
         <?php } elseif ($value['type'] == "hr") { ?>
-        <hr>
+        <hr />
         <?php } ?>
     <?php } ?>
     <div class="form-group" style="margin-top:50px;">
@@ -483,7 +477,6 @@ $(function () {
     $('[class="input-color"]').wpColorPicker();
 });
 </script>
-
 <?php
 }
 add_action('admin_menu', 'mytheme_add_admin');

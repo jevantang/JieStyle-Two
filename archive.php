@@ -1,5 +1,4 @@
 <?php get_header(); ?>
-
 <div id="main">
     <div class="row box">
         <div class="col-md-8">
@@ -14,7 +13,6 @@
             <?php else : ?>
             <h3 class="uptop"><?php _e( 'Blog Archives' ); ?></h3>
             <?php endif; ?>
-
             <?php while ( have_posts() ) : the_post(); ?>
             <article class="article-list-2 clearfix">
                 <div class="post-time"><i class="fa fa-calendar"></i> <?php the_time('m月d日') ?></div>
@@ -35,5 +33,4 @@
         </div>
     </div>
 </div>
-
 <?php get_footer(); ?>
