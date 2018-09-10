@@ -19,7 +19,7 @@
         <?php if (get_option('tang_dashang') == '启用') { ?>
         <section class="support-author">
             <p><?php echo stripslashes(get_option('tang_dashang_info')); ?></p>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal"><i class="fa fa-cny" aria-hidden="true"></i> 打赏支持</button>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal"><i class="fa fa-cny" aria-hidden="true"></i> 赞赏支持</button>
         </section>
         <?php } ?>
         <section id="comments">
@@ -59,7 +59,7 @@
         <div class="modal-content single-dashang">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel"><i class="fa fa-cny" aria-hidden="true"></i> 打赏支持</h4>
+                <h4 class="modal-title" id="myModalLabel"><i class="fa fa-cny" aria-hidden="true"></i> 赞赏支持</h4>
             </div>
             <div class="modal-body text-center">
                 <p><img border="0" src="<?php echo stripslashes(get_option('tang_dashang_alipay')); ?>"><img border="0" src="<?php echo stripslashes(get_option('tang_dashang_wechat')); ?>"></p>
