@@ -1,5 +1,4 @@
 <?php get_header(); ?>
-
 <div id="main">
 <?php while ( have_posts() ) : the_post(); ?>
     <article class="col-md-8 col-md-offset-2 view clearfix">
@@ -69,5 +68,4 @@
     </div>
 </div>
 <!--modal-->
-
 <?php get_footer(); ?>
