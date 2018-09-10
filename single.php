@@ -62,7 +62,7 @@
             </div>
             <div class="modal-body text-center">
                 <p><img border="0" src="<?php echo stripslashes(get_option('tang_dashang_alipay')); ?>"><img border="0" src="<?php echo stripslashes(get_option('tang_dashang_wechat')); ?>"></p>
-                <p>扫描二维码，输入您要打赏的金额</p>
+                <p>扫描二维码，输入您要赞赏的金额</p>
             </div>
         </div>
     </div>

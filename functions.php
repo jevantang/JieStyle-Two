@@ -352,27 +352,27 @@ $options = array (
         "type" => "hr",
     ),
     array(
-        "name" => "打赏-是否启用",
+        "name" => "赞赏-是否启用",
         "id" => $shortname."_dashang",
         "type" => "select",
         "std" => "禁用",
         "options" => array("禁用", "启用")
     ),
     array(
-        "name" => "打赏-描述",
+        "name" => "赞赏-描述",
         "id" => $shortname."_dashang_info",
         "type" => "text",
-        "std" => "如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作！",
+        "std" => "如果觉得我的文章对您有用，请随意赞赏。您的支持将鼓励我继续创作！",
         "explain" => "想对读者说的话"
     ),
     array(
-        "name" => "打赏-支付宝",
+        "name" => "赞赏-支付宝",
         "id" => $shortname."_dashang_alipay",
         "type" => "text",
         "std" => "https://tangjie.me/media/AliPay.png",
     ),
     array(
-        "name" => "打赏-微信",
+        "name" => "赞赏-微信",
         "id" => $shortname."_dashang_wechat",
         "type" => "text",
         "std" => "https://tangjie.me/media/WeixinPay.png",
