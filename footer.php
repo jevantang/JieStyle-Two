@@ -13,6 +13,8 @@
     </div>
     <div style="display:none;"><?php echo stripslashes(get_option('tang_tongji')); ?></div>
 </footer>
+<script type="text/javascript" src="<?php bloginfo('template_directory'); ?>/js/jquery.min.js"></script>
+<script type="text/javascript" src="<?php bloginfo('template_directory'); ?>/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="<?php bloginfo('template_directory'); ?>/js/skel.min.js"></script>
 <script type="text/javascript" src="<?php bloginfo('template_directory'); ?>/js/util.min.js"></script>
 <script type="text/javascript" src="<?php bloginfo('template_directory'); ?>/js/nav.js"></script>

@@ -68,8 +68,6 @@ if ( is_single() ){
 <link rel="icon" href="<?php bloginfo('template_directory'); ?>/images/icon_32.png" type="image/x-icon">
 <link rel="stylesheet" href="<?php bloginfo('template_directory'); ?>/css/bootstrap.min.css">
 <link rel="stylesheet" href="<?php bloginfo('template_directory'); ?>/css/font-awesome.min.css">
-<script type="text/javascript" src="<?php bloginfo('template_directory'); ?>/js/jquery.min.js"></script>
-<script type="text/javascript" src="<?php bloginfo('template_directory'); ?>/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>">
 <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
 <?php
