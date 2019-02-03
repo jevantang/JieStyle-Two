@@ -1,6 +1,6 @@
 # JieStyle Two 更新日志
 
-### v2.4 Release 2019-02-03
+### v2.4 Release 2019-02-04
 * 前端框架 Bootstrap 升级到 v3.4.0
 * 图标字体库 Font Awesome 升级到 v5.7.1
 * 模板支持新组件
