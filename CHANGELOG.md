@@ -1,5 +1,10 @@
 # JieStyle Two 更新日志
 
+### v2.4 Release 2019-02-03
+* 前端框架 Bootstrap 升级到 v3.4.0
+* 图标字体库 Font Awesome 升级到 v5.7.1
+* 模板支持新组件
+
 ### v2.3.6 Release 2019-01-28
 * 更新介绍文本，支持 WordPress 5.x 版本
 * 将页头的 JS 文件迁移到页尾，进一步提升加载速度

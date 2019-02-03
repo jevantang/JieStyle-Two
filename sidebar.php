@@ -2,7 +2,7 @@
     <form id="searchform" action="<?php bloginfo('siteurl'); ?>">
         <div class="input-group">
             <input type="search" class="form-control" placeholder="搜索…" value="<?php the_search_query(); ?>" name="s">
-            <span class="input-group-btn"><button class="btn btn-default" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button></span>
+            <span class="input-group-btn"><button class="btn btn-default" type="submit"><i class="fas fa-search"></i></button></span>
         </div>
     </form>
 </aside>

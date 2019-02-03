@@ -2,13 +2,13 @@
     <form id="searchform" action="<?php bloginfo('siteurl'); ?>">
         <div class="input-group">
             <input type="search" class="form-control" placeholder="搜索…" value="<?php the_search_query(); ?>" name="s">
-            <span class="input-group-btn"><button class="btn btn-default" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button></span>
+            <span class="input-group-btn"><button class="btn btn-default" type="submit"><i class="fas fa-search"></i></button></span>
         </div>
     </form>
 </div>
 <footer id="footer">
     <div class="copyright">
-        <p><i class="fa fa-copyright" aria-hidden="true"></i> <?php echo get_option('tang_years'); ?> <b><?php echo get_option('tang_company'); ?></b></p>
+        <p><i class="far fa-copyright"></i> <?php echo get_option('tang_years'); ?> <b><?php echo get_option('tang_company'); ?></b></p>
         <p>Powered by <b>WordPress</b>. Theme by <a href="https://tangjie.me/jiestyle-two" data-toggle="tooltip" data-placement="top" title="WordPress 主题模板" target="_blank"><b>JieStyle Two</b></a> | <?php echo get_option( 'zh_cn_l10n_icp_num' );?></p>
     </div>
     <div style="display:none;"><?php echo stripslashes(get_option('tang_tongji')); ?></div>
