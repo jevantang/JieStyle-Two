@@ -53,7 +53,7 @@ remove_filter( 'oembed_response_data', 'get_oembed_response_data_rich', 10, 4);
 add_filter('rest_enabled', '__return_false');
 add_filter('rest_jsonp_enabled', '__return_false');
 
-//禁用Emoji表情
+//禁用 Emoji 表情
 function disable_emojis() {
     remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
     remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
@@ -73,7 +73,7 @@ function disable_emojis_tinymce( $plugins ) {
     }
 }
 
-//移除菜单的多余CSS选择器
+//移除菜单的多余 CSS 选择器
 add_filter('nav_menu_css_class', 'my_css_attributes_filter', 100, 1);
 add_filter('nav_menu_item_id', 'my_css_attributes_filter', 100, 1);
 add_filter('page_css_class', 'my_css_attributes_filter', 100, 1);
@@ -81,12 +81,12 @@ function my_css_attributes_filter($var) {
     return is_array($var) ? array() : '';
 }
 
-//替换Gravatar服务器
-function kratos_get_avatar( $avatar ) {
-    $avatar = preg_replace( "/http:\/\/(www|\d).gravatar.com/","https://cn.gravatar.com",$avatar );
+//替换 Gravatar 服务器
+function replace_gravatar($avatar) {
+    $avatar = str_replace(array("//gravatar.com/", "//secure.gravatar.com/", "//www.gravatar.com/", "//0.gravatar.com/", "//1.gravatar.com/", "//2.gravatar.com/", "//cn.gravatar.com/"), "//sdn.geekzu.org/", $avatar);
     return $avatar;
 }
-add_filter( 'get_avatar', 'kratos_get_avatar' );
+add_filter( 'get_avatar', 'replace_gravatar' );
 
 //启动友情链接
 add_filter( 'pre_option_link_manager_enabled', '__return_true' );
