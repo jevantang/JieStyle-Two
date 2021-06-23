@@ -11,7 +11,9 @@
         <p><i class="far fa-copyright"></i> <?php echo get_option('tang_years'); ?> <b><?php echo get_option('tang_company'); ?></b></p>
         <p>Powered by <b>WordPress</b>. Theme by <a href="https://tangjie.me/jiestyle-two" data-toggle="tooltip" data-placement="top" title="WordPress 主题模板" target="_blank"><b>JieStyle Two</b></a> | <?php echo get_option( 'zh_cn_l10n_icp_num' );?></p>
     </div>
-    <div style="display:none;"><?php echo stripslashes(get_option('tang_tongji')); ?></div>
+    <?php if (get_option('tang_tongji_position') == 'body') { ?>
+        <div style="display:none;"><?php echo stripslashes(get_option('tang_tongji')); ?></div>
+    <?php } ?>
 </footer>
 <script type="text/javascript" src="<?php bloginfo('template_directory'); ?>/js/jquery.min.js"></script>
 <script type="text/javascript" src="<?php bloginfo('template_directory'); ?>/js/bootstrap.min.js"></script>

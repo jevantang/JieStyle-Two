@@ -75,13 +75,16 @@ if ( is_singular() && get_option( 'thread_comments' ) )
 wp_enqueue_script( 'comment-reply' );
 wp_head();
 ?>
+<?php if (get_option('tang_tongji_position') == 'head') { ?>
+    <?php echo stripslashes(get_option('tang_tongji')); ?>
+<?php } ?>
 <style type="text/css">
-a{color:<?php echo stripslashes(get_option('tang_color')); ?>}
-a:hover{color:<?php echo stripslashes(get_option('tang_color_hover')); ?>!important}
-#header{background-color:<?php echo stripslashes(get_option('tang_color')); ?>}
-.widget .widget-title::after{background-color:<?php echo stripslashes(get_option('tang_color')); ?>}
-.uptop{border-left-color:<?php echo stripslashes(get_option('tang_color')); ?>}
-#titleBar .toggle:before{background:<?php echo stripslashes(get_option('tang_color')); ?>}
+    a{color:<?php echo stripslashes(get_option('tang_color')); ?>}
+    a:hover{color:<?php echo stripslashes(get_option('tang_color_hover')); ?>!important}
+    #header{background-color:<?php echo stripslashes(get_option('tang_color')); ?>}
+    .widget .widget-title::after{background-color:<?php echo stripslashes(get_option('tang_color')); ?>}
+    .uptop{border-left-color:<?php echo stripslashes(get_option('tang_color')); ?>}
+    #titleBar .toggle:before{background:<?php echo stripslashes(get_option('tang_color')); ?>}
 </style>
 </head>
 
