@@ -5,7 +5,7 @@ Theme URI: https://tangjie.me/jiestyle-two
 Author: Jarvis Tang
 Author URI: https://tangjie.me/
 Description: A responsible theme for WordPress.
-Version: 2.4
+Version: 2.5
 License: GNU General Public License v3.0
 */
 function tangstyle_page_menu_args( $args ) {
@@ -53,7 +53,7 @@ remove_filter( 'oembed_response_data', 'get_oembed_response_data_rich', 10, 4);
 add_filter('rest_enabled', '__return_false');
 add_filter('rest_jsonp_enabled', '__return_false');
 
-//禁用 Emoji 表情
+//禁用 Emoji 表情选项
 function disable_emojis() {
     remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
     remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
@@ -233,7 +233,7 @@ $options = array (
         "name" => "版权年份（页脚）",
         "id" => $shortname."_years",
         "type" => "text",
-        "std" => "2017",
+        "std" => "2021",
     ),
     array(
         "name" => "版权公司（页脚）",
@@ -246,6 +246,13 @@ $options = array (
         "id" => $shortname."_tongji",
         "type" => "textarea",
         "std" => "代码在页面底部，统计标识不会显示，但不影响统计效果"
+    ),
+    array(
+        "name" => "统计代码放置位置",
+        "id" => $shortname."_tongji_position",
+        "type" => "select",
+        "std" => "body",
+        "options" => array("body", "head")
     ),
     array(
         "type" => "hr",
@@ -381,20 +388,19 @@ $options = array (
 
 function mytheme_add_admin() {
     global $themename, $shortname, $options;
-    if ( $_GET['page'] == basename(__FILE__) ) {
-        if ( 'save' == $_REQUEST['action'] ) {
+    if ( isset($_GET['page'] ) ) {
+        if ( isset( $_REQUEST['action'] )) {
             foreach ($options as $value) {
-            update_option( $value['id'], $_REQUEST[ $value['id'] ] ); }
-            foreach ($options as $value) {
-            if( isset( $_REQUEST[ $value['id'] ] ) ) { update_option( $value['id'], $_REQUEST[ $value['id'] ]  ); } else { delete_option( $value['id'] ); } }
-            header("Location: themes.php?page=functions.php&saved=true");
-            die;
-        } else if( 'reset' == $_REQUEST['action'] ) {
-            foreach ($options as $value) {
-                delete_option( $value['id'] );
-                update_option( $value['id'], $value['std'] );
+                update_option( $value['id'], $_REQUEST[ $value['id'] ] );
             }
-            header("Location: themes.php?page=functions.php&reset=true");
+            foreach ($options as $value) {
+                if( isset( $_REQUEST[ $value['id'] ] ) ) {
+                    update_option( $value['id'], $_REQUEST[ $value['id'] ]  );
+                } else {
+                    delete_option( $value['id'] );
+                }
+            }
+            header("Location: themes.php?page=functions.php&saved=true");
             die;
         }
     }
@@ -403,11 +409,12 @@ function mytheme_add_admin() {
 
 function mytheme_admin() {
     global $themename, $shortname, $options;
-    if ( $_REQUEST['saved'] ) echo '<div id="message" class="updated notice is-dismissible"><p>'.$themename.' 设置已保存。</p></div>';
+    if ( isset($_REQUEST['saved']) ) echo '<div id="message" class="updated notice is-dismissible"><p>'.$themename.' 设置已保存。</p></div>';
 ?>
+
 <link rel="stylesheet" href="<?php bloginfo('template_directory'); ?>/css/bootstrap.min.css">
 <div class="container-fluid">
-    <h2 class="text-primary"><?php echo $themename; ?> Two <a href="https://tangjie.me/jiestyle-two" target="_blank" data-toggle="tooltip" data-placement="bottom" title="点击查看更新"><span class="badge">v2.4</span></a></h2>
+    <h2 class="text-primary"><?php echo $themename; ?> Two <a href="https://tangjie.me/jiestyle-two" target="_blank" data-toggle="tooltip" data-placement="bottom" title="点击查看更新"><span class="badge">v2.5</span></a></h2>
     <hr class="wp-header-end">
     <hr>
     <form class="form-horizontal" method="post">

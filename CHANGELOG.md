@@ -1,5 +1,13 @@
 # JieStyle Two 更新日志
 
+### v2.5 Release 2021-06-24
+* 前端框架 Bootstrap 升级到 v3.4.1
+* 图标字体库 Font Awesome 升级到 v5.15.3
+* 统计代码支持选择放置位置（head 或 body）
+* 删除评论模板冗余参数
+* 删除设置页无用功能
+* 支持 PHP 8
+
 ### v2.4 Release 2019-02-04
 * 前端框架 Bootstrap 升级到 v3.4.0
 * 图标字体库 Font Awesome 升级到 v5.7.1
