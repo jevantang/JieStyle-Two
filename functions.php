@@ -227,25 +227,37 @@ $options = array (
         "std" => "它将显示在首页的 meta 标签的 keywords 属性里。多个关键字以英文逗号隔开。"
     ),
     array(
-        "type" => "hr",
+        "type" => "hr"
     ),
     array(
-        "name" => "版权年份（页脚）",
+        "name" => "版权年份",
         "id" => $shortname."_years",
         "type" => "text",
-        "std" => "2021",
+        "std" => "2021"
     ),
     array(
-        "name" => "版权公司（页脚）",
+        "name" => "版权公司",
         "id" => $shortname."_company",
         "type" => "text",
-        "std" => "产品经理@唐杰",
+        "std" => "产品经理@唐杰"
     ),
     array(
-        "name" => "统计代码（页脚）",
+        "name" => "ICP 备案号",
+        "id" => $shortname."_icp",
+        "type" => "text",
+        "std" => "{当前为空}"
+    ),
+    array(
+        "name" => "公安备案号",
+        "id" => $shortname."_beian",
+        "type" => "text",
+        "std" => "{当前为空}"
+    ),
+    array(
+        "name" => "统计代码",
         "id" => $shortname."_tongji",
         "type" => "textarea",
-        "std" => "代码在页面底部，统计标识不会显示，但不影响统计效果"
+        "std" => "代码在 body 页面底部或者 head 中，统计标识不会显示，但不影响统计效果"
     ),
     array(
         "name" => "统计代码放置位置",
@@ -255,27 +267,27 @@ $options = array (
         "options" => array("body", "head")
     ),
     array(
-        "type" => "hr",
+        "type" => "hr"
     ),
     array(
         "name" => "主题风格色调",
         "id" => $shortname."_color",
         "type" => "color",
         "std" => "#5bc0eb",
-        "explain" => "默认颜色 #5bc0eb | 包括左侧导航栏底色",
+        "explain" => "默认颜色 #5bc0eb | 包括左侧导航栏底色"
     ),
     array(
         "name" => "链接二态颜色",
         "id" => $shortname."_color_hover",
         "type" => "color",
         "std" => "#2980b9",
-        "explain" => "默认颜色 #2980b9 | 鼠标放在链接上的颜色",
+        "explain" => "默认颜色 #2980b9 | 鼠标放在链接上的颜色"
     ),
     array(
         "name" => "头像图片链接",
         "id" => $shortname."_avatar",
         "type" => "text",
-        "std" => "https://tangjie.me/media/avatar.jpg",
+        "std" => "https://tangjie.me/media/avatar.jpg"
     ),
     array(
         "name" => "是否显示微信公众号",
@@ -288,10 +300,10 @@ $options = array (
         "name" => "公众号二维码图片",
         "id" => $shortname."_weixin_img",
         "type" => "text",
-        "std" => "https://tangjie.me/media/weixin.jpg",
+        "std" => "https://tangjie.me/media/weixin.jpg"
     ),
     array(
-        "type" => "hr",
+        "type" => "hr"
     ),
     array(
         "name" => "是否显示RSS订阅源",
@@ -301,7 +313,7 @@ $options = array (
         "options" => array("隐藏", "显示")
     ),
     array(
-        "type" => "hr",
+        "type" => "hr"
     ),
     array(
         "name" => "是否显示Weibo",
@@ -314,7 +326,7 @@ $options = array (
         "name" => "Weibo地址",
         "id" => $shortname."_weibo_url",
         "type" => "text",
-        "std" => "https://weibo.com/782622",
+        "std" => "https://weibo.com"
     ),
     array(
         "name" => "是否显示Twitter",
@@ -327,7 +339,7 @@ $options = array (
         "name" => "Twitter地址",
         "id" => $shortname."_twitter_url",
         "type" => "text",
-        "std" => "https://twitter.com/JieTangOK",
+        "std" => "https://twitter.com"
     ),
     array(
         "name" => "是否显示Facebook",
@@ -340,7 +352,7 @@ $options = array (
         "name" => "Facebook地址",
         "id" => $shortname."_facebook_url",
         "type" => "text",
-        "std" => "https://www.facebook.com/jietangok",
+        "std" => "https://www.facebook.com"
     ),
     array(
         "name" => "是否显示GitHub",
@@ -353,7 +365,7 @@ $options = array (
         "name" => "GitHub地址",
         "id" => $shortname."_github_url",
         "type" => "text",
-        "std" => "https://github.com/Jarvis-Tang",
+        "std" => "https://github.com"
     ),
     array(
         "type" => "hr",
@@ -376,13 +388,13 @@ $options = array (
         "name" => "赞赏-支付宝",
         "id" => $shortname."_dashang_alipay",
         "type" => "text",
-        "std" => "https://tangjie.me/media/AliPay.png",
+        "std" => "https://tangjie.me/media/AliPay.png"
     ),
     array(
         "name" => "赞赏-微信",
         "id" => $shortname."_dashang_wechat",
         "type" => "text",
-        "std" => "https://tangjie.me/media/WeixinPay.png",
+        "std" => "https://tangjie.me/media/WeixinPay.png"
     ),
 );
 
