@@ -1,5 +1,9 @@
 # JieStyle Two 更新日志
 
+### v2.5.1 Release 2021-07-08
+* 支持主题设置中配置 ICP 备案号
+* 支持主题设置中配置公安联网备案号
+
 ### v2.5 Release 2021-06-24
 * 前端框架 Bootstrap 升级到 v3.4.1
 * 图标字体库 Font Awesome 升级到 v5.15.3
