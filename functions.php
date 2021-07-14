@@ -5,7 +5,7 @@ Theme URI: https://tangjie.me/jiestyle-two
 Author: Jarvis Tang
 Author URI: https://tangjie.me/
 Description: A responsible theme for WordPress.
-Version: v2.5.1
+Version: v2.6
 License: GNU General Public License v3.0
 */
 function tangstyle_page_menu_args( $args ) {
@@ -196,307 +196,318 @@ function tangstyle_comment( $comment, $args, $depth ) {
 }
 endif;
 
-//颜色选择器
-function color_picker_assets() {
-    wp_enqueue_style( 'wp-color-picker' );
-    wp_enqueue_script( 'my-color-picker-handle' );
-    wp_enqueue_script( 'wp-color-picker' );
-};
-add_action( 'admin_enqueue_scripts', 'color_picker_assets' );
-?>
-<?php
-$themename = "JieStyle";
-$shortname = "tang";
-$options = array (
-    array(
-        "name" => "首页标题 Title",
-        "id" => $shortname."_title",
-        "type" => "text",
-        "std" => "它将显示在首页的 title 标签里"
-    ),
-    array(
-        "name" => "首页描述 Description",
-        "id" => $shortname."_description",
-        "type" => "textarea",
-        "std" => "它将显示在首页的 meta 标签的 description 属性里"
-    ),
-    array(
-        "name" => "首页关键字 KeyWords",
-        "id" => $shortname."_keywords",
-        "type" => "textarea",
-        "std" => "它将显示在首页的 meta 标签的 keywords 属性里。多个关键字以英文逗号隔开。"
-    ),
-    array(
-        "type" => "hr"
-    ),
-    array(
-        "name" => "版权年份",
-        "id" => $shortname."_years",
-        "type" => "text",
-        "std" => "2021"
-    ),
-    array(
-        "name" => "版权公司",
-        "id" => $shortname."_company",
-        "type" => "text",
-        "std" => "产品经理@唐杰"
-    ),
-    array(
-        "name" => "ICP 备案号",
-        "id" => $shortname."_icp",
-        "type" => "text",
-        "std" => "{当前为空}"
-    ),
-    array(
-        "name" => "公安备案号",
-        "id" => $shortname."_beian",
-        "type" => "text",
-        "std" => "{当前为空}"
-    ),
-    array(
-        "name" => "统计代码",
-        "id" => $shortname."_tongji",
-        "type" => "textarea",
-        "std" => "代码在 body 页面底部或者 head 中，统计标识不会显示，但不影响统计效果"
-    ),
-    array(
-        "name" => "统计代码放置位置",
-        "id" => $shortname."_tongji_position",
-        "type" => "select",
-        "std" => "body",
-        "options" => array("body", "head")
-    ),
-    array(
-        "type" => "hr"
-    ),
-    array(
-        "name" => "主题风格色调",
-        "id" => $shortname."_color",
-        "type" => "color",
-        "std" => "#5bc0eb",
-        "explain" => "默认颜色 #5bc0eb | 包括左侧导航栏底色"
-    ),
-    array(
-        "name" => "链接二态颜色",
-        "id" => $shortname."_color_hover",
-        "type" => "color",
-        "std" => "#2980b9",
-        "explain" => "默认颜色 #2980b9 | 鼠标放在链接上的颜色"
-    ),
-    array(
-        "name" => "头像图片链接",
-        "id" => $shortname."_avatar",
-        "type" => "text",
-        "std" => "https://tangjie.me/media/avatar.jpg"
-    ),
-    array(
-        "name" => "是否显示微信公众号",
-        "id" => $shortname."_weixin",
-        "type" => "select",
-        "std" => "隐藏",
-        "options" => array("隐藏", "显示")
-    ),
-    array(
-        "name" => "公众号二维码图片",
-        "id" => $shortname."_weixin_img",
-        "type" => "text",
-        "std" => "https://tangjie.me/media/weixin.jpg"
-    ),
-    array(
-        "type" => "hr"
-    ),
-    array(
-        "name" => "是否显示RSS订阅源",
-        "id" => $shortname."_rss",
-        "type" => "select",
-        "std" => "显示",
-        "options" => array("隐藏", "显示")
-    ),
-    array(
-        "type" => "hr"
-    ),
-    array(
-        "name" => "是否显示Weibo",
-        "id" => $shortname."_weibo",
-        "type" => "select",
-        "std" => "隐藏",
-        "options" => array("隐藏", "显示")
-    ),
-    array(
-        "name" => "Weibo地址",
-        "id" => $shortname."_weibo_url",
-        "type" => "text",
-        "std" => "https://weibo.com"
-    ),
-    array(
-        "name" => "是否显示Twitter",
-        "id" => $shortname."_twitter",
-        "type" => "select",
-        "std" => "隐藏",
-        "options" => array("隐藏", "显示")
-    ),
-    array(
-        "name" => "Twitter地址",
-        "id" => $shortname."_twitter_url",
-        "type" => "text",
-        "std" => "https://twitter.com"
-    ),
-    array(
-        "name" => "是否显示Facebook",
-        "id" => $shortname."_facebook",
-        "type" => "select",
-        "std" => "隐藏",
-        "options" => array("隐藏", "显示")
-    ),
-    array(
-        "name" => "Facebook地址",
-        "id" => $shortname."_facebook_url",
-        "type" => "text",
-        "std" => "https://www.facebook.com"
-    ),
-    array(
-        "name" => "是否显示GitHub",
-        "id" => $shortname."_github",
-        "type" => "select",
-        "std" => "隐藏",
-        "options" => array("隐藏", "显示")
-    ),
-    array(
-        "name" => "GitHub地址",
-        "id" => $shortname."_github_url",
-        "type" => "text",
-        "std" => "https://github.com"
-    ),
-    array(
-        "type" => "hr",
-    ),
-    array(
-        "name" => "赞赏-是否启用",
-        "id" => $shortname."_dashang",
-        "type" => "select",
-        "std" => "禁用",
-        "options" => array("禁用", "启用")
-    ),
-    array(
-        "name" => "赞赏-描述",
-        "id" => $shortname."_dashang_info",
-        "type" => "text",
-        "std" => "如果觉得我的文章对您有用，请随意赞赏。您的支持将鼓励我继续创作！",
-        "explain" => "想对读者说的话"
-    ),
-    array(
-        "name" => "赞赏-支付宝",
-        "id" => $shortname."_dashang_alipay",
-        "type" => "text",
-        "std" => "https://tangjie.me/media/AliPay.png"
-    ),
-    array(
-        "name" => "赞赏-微信",
-        "id" => $shortname."_dashang_wechat",
-        "type" => "text",
-        "std" => "https://tangjie.me/media/WeixinPay.png"
-    ),
-);
+//主题设置
+function JieStyle_customize_register( $wp_customize ) {
 
-function mytheme_add_admin() {
-    global $themename, $shortname, $options;
-    if ( isset($_GET['page'] ) ) {
-        if ( isset( $_REQUEST['action'] )) {
-            foreach ($options as $value) {
-                update_option( $value['id'], $_REQUEST[ $value['id'] ] );
-            }
-            foreach ($options as $value) {
-                if( isset( $_REQUEST[ $value['id'] ] ) ) {
-                    update_option( $value['id'], $_REQUEST[ $value['id'] ]  );
-                } else {
-                    delete_option( $value['id'] );
-                }
-            }
-            header("Location: themes.php?page=functions.php&saved=true");
-            die;
-        }
-    }
-    add_theme_page($themename." 设置", "$themename 设置", 'edit_themes', basename(__FILE__), 'mytheme_admin');
+    //SEO 设置
+    $wp_customize->add_section('setting_seo', array(
+        'title' => 'SEO 设置',
+        'priority' => 30,
+        'capability' => 'edit_theme_options'
+    ));
+    $wp_customize->add_setting('tang_title', array(
+        'default' => '它将显示在首页的 title 标签里',
+        'type' => 'option'
+    ));
+    $wp_customize->add_control('tang_title', array(
+        'label' => '首页标题 Title',
+        'section' => 'setting_seo',
+        'type' => 'text'
+    ));
+    $wp_customize->add_setting('tang_description', array(
+        'default' => '它将显示在首页的 meta 标签的 description 属性里',
+        'type' => 'option'
+    ));
+    $wp_customize->add_control('tang_description', array(
+        'label' => '首页描述 Description',
+        'section' => 'setting_seo',
+        'type' => 'textarea'
+    ));
+    $wp_customize->add_setting('tang_keywords', array(
+        'default' => '它将显示在首页的 meta 标签的 keywords 属性里，多个关键字以英文逗号隔开',
+        'type' => 'option'
+    ));
+    $wp_customize->add_control('tang_keywords', array(
+        'label' => '首页关键字 KeyWords',
+        'section' => 'setting_seo',
+        'type' => 'textarea'
+    ));
+
+    //风格设置
+    $wp_customize->add_section('setting_style', array(
+        'title' => '风格设置',
+        'priority' => 31,
+        'capability' => 'edit_theme_options'
+    ));
+    $wp_customize->add_setting('tang_avatar', array(
+        'default' => 'https://tangjie.me/media/avatar.jpg',
+        'type' => 'option'
+    ));
+    $wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'tang_avatar', array(
+        'label' => '头像图片链接',
+        'section' => 'setting_style'
+    )));
+    $wp_customize->add_setting('tang_color', array(
+        'default' => '#5bc0eb',
+        'type' => 'option'
+    ));
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'tang_color', array(
+        'label' => '主题风格色调',
+        'section' => 'setting_style'
+    )));
+    $wp_customize->add_setting('tang_color_hover', array(
+        'default' => '#2980b9',
+        'type' => 'option'
+    ));
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'tang_color_hover', array(
+        'label' => '链接二态颜色',
+        'section' => 'setting_style'
+    )));
+
+    //社交媒体设置
+    $wp_customize->add_section('setting_interactive', array(
+        'title' => '社交媒体设置',
+        'priority' => 32,
+        'capability' => 'edit_theme_options'
+    ));
+    $wp_customize->add_setting('tang_rss', array(
+        'default' => '隐藏',
+        'type' => 'option'
+    ));
+    $wp_customize->add_control('tang_rss', array(
+        'label' => '是否显示 RSS 订阅源',
+        'section' => 'setting_interactive',
+        'type' => 'select',
+        'choices' => array(
+            '隐藏' => __( '隐藏' ),
+            '显示' => __( '显示' )
+        )
+    ));
+    $wp_customize->add_setting('tang_weixin', array(
+        'default' => '隐藏',
+        'type' => 'option'
+    ));
+    $wp_customize->add_control('tang_weixin', array(
+        'label' => '是否显示微信公众号',
+        'section' => 'setting_interactive',
+        'type' => 'select',
+        'choices' => array(
+            '隐藏' => __( '隐藏' ),
+            '显示' => __( '显示' )
+        )
+    ));
+    $wp_customize->add_setting('tang_weixin_url', array(
+        'default' => 'https://tangjie.me/media/wechat/pmtangjie.jpg',
+        'type' => 'option'
+    ));
+    $wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'tang_weixin_url', array(
+        'label' => '公众号二维码图片',
+        'section' => 'setting_interactive',
+    )));
+    $wp_customize->add_setting('tang_weibo', array(
+        'default' => '隐藏',
+        'type' => 'option'
+    ));
+    $wp_customize->add_control('tang_weibo', array(
+        'label' => '是否显示微博',
+        'section' => 'setting_interactive',
+        'type' => 'select',
+        'choices' => array(
+            '隐藏' => __( '隐藏' ),
+            '显示' => __( '显示' )
+        )
+    ));
+    $wp_customize->add_setting('tang_weibo_url', array(
+        'default' => 'https://weibo.com',
+        'type' => 'option'
+    ));
+    $wp_customize->add_control('tang_weibo_url', array(
+        'label' => '微博地址',
+        'section' => 'setting_interactive',
+        'type' => 'url'
+    ));
+    $wp_customize->add_setting('tang_twitter', array(
+        'default' => '隐藏',
+        'type' => 'option'
+    ));
+    $wp_customize->add_control('tang_twitter', array(
+        'label' => '是否显示 Twitter',
+        'section' => 'setting_interactive',
+        'type' => 'select',
+        'choices' => array(
+            '隐藏' => __( '隐藏' ),
+            '显示' => __( '显示' )
+        )
+    ));
+    $wp_customize->add_setting('tang_twitter_url', array(
+        'default' => 'https://twitter.com',
+        'type' => 'option'
+    ));
+    $wp_customize->add_control('tang_twitter_url', array(
+        'label' => 'Twitter 地址',
+        'section' => 'setting_interactive',
+        'type' => 'url'
+    ));
+    $wp_customize->add_setting('tang_facebook', array(
+        'default' => '隐藏',
+        'type' => 'option'
+    ));
+    $wp_customize->add_control('tang_facebook', array(
+        'label' => '是否显示 Facebook',
+        'section' => 'setting_interactive',
+        'type' => 'select',
+        'choices' => array(
+            '隐藏' => __( '隐藏' ),
+            '显示' => __( '显示' )
+        )
+    ));
+    $wp_customize->add_setting('tang_facebook_url', array(
+        'default' => 'https://facebook.com',
+        'type' => 'option'
+    ));
+    $wp_customize->add_control('tang_facebook_url', array(
+        'label' => 'Facebook 地址',
+        'section' => 'setting_interactive',
+        'type' => 'url'
+    ));
+    $wp_customize->add_setting('tang_github', array(
+        'default' => '隐藏',
+        'type' => 'option'
+    ));
+    $wp_customize->add_control('tang_github', array(
+        'label' => '是否显示 GitHub',
+        'section' => 'setting_interactive',
+        'type' => 'select',
+        'choices' => array(
+            '隐藏' => __( '隐藏' ),
+            '显示' => __( '显示' )
+        )
+    ));
+    $wp_customize->add_setting('tang_github_url', array(
+        'default' => 'https://github.com',
+        'type' => 'option'
+    ));
+    $wp_customize->add_control('tang_github_url', array(
+        'label' => 'GitHub 地址',
+        'section' => 'setting_interactive',
+        'type' => 'url'
+    ));
+
+    //赞赏设置
+    $wp_customize->add_section('setting_dashang', array(
+        'title' => '赞赏设置',
+        'priority' => 33,
+        'capability' => 'edit_theme_options'
+    ));
+    $wp_customize->add_setting('tang_dashang', array(
+        'default' => '停用',
+        'type' => 'option'
+    ));
+    $wp_customize->add_control('tang_dashang', array(
+        'label' => '是否启用',
+        'section' => 'setting_dashang',
+        'type' => 'select',
+        'choices' => array(
+            '停用' => __( '停用' ),
+            '启用' => __( '启用' )
+        )
+    ));
+    $wp_customize->add_setting('tang_dashang_info', array(
+        'default' => '如果觉得我的文章对您有用，请随意赞赏。您的支持将鼓励我继续创作！',
+        'type' => 'option'
+    ));
+    $wp_customize->add_control('tang_dashang_info', array(
+        'label' => '想对读者说的话',
+        'section' => 'setting_dashang',
+        'type' => 'textarea'
+    ));
+    $wp_customize->add_setting('tang_dashang_alipay', array(
+        'default' => 'https://tangjie.me/media/AliPay.png',
+        'type' => 'option'
+    ));
+    $wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'tang_dashang_alipay', array(
+        'label' => '支付宝收款二维码',
+        'section' => 'setting_dashang',
+    )));
+    $wp_customize->add_setting('tang_dashang_wechat', array(
+        'default' => 'https://tangjie.me/media/WeixinPay.png',
+        'type' => 'option'
+    ));
+    $wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'tang_dashang_wechat', array(
+        'label' => '微信收款二维码',
+        'section' => 'setting_dashang',
+    )));
+
+    //版权信息
+    $wp_customize->add_section('setting_copy', array(
+        'title' => '版权信息',
+        'priority' => 34,
+        'capability' => 'edit_theme_options'
+    ));
+    $wp_customize->add_setting('tang_years', array(
+        'default' => '2011-2021',
+        'type' => 'option'
+    ));
+    $wp_customize->add_control('tang_years', array(
+        'label' => '版权年份',
+        'section' => 'setting_copy',
+        'type' => 'text'
+    ));
+    $wp_customize->add_setting('tang_company', array(
+        'default' => '唐杰',
+        'type' => 'option'
+    ));
+    $wp_customize->add_control('tang_company', array(
+        'label' => '版权公司',
+        'section' => 'setting_copy',
+        'type' => 'text'
+    ));
+    $wp_customize->add_setting('tang_icp', array(
+        'type' => 'option'
+    ));
+    $wp_customize->add_control('tang_icp', array(
+        'label' => 'ICP 备案号',
+        'section' => 'setting_copy',
+        'type' => 'text'
+    ));
+    $wp_customize->add_setting('tang_beian', array(
+        'type' => 'option'
+    ));
+    $wp_customize->add_control('tang_beian', array(
+        'label' => '公安备案号',
+        'section' => 'setting_copy',
+        'type' => 'text'
+    ));
+
+    //统计代码
+    $wp_customize->add_section('setting_tongji', array(
+        'title' => '统计代码',
+        'priority' => 34,
+        'capability' => 'edit_theme_options'
+    ));
+    $wp_customize->add_setting('tang_tongji', array(
+        'default' => '代码在 body 页面底部或者 head 中，统计标识不会显示，但不影响统计效果',
+        'type' => 'option'
+    ));
+    $wp_customize->add_control('tang_tongji', array(
+        'label' => '统计代码',
+        'section' => 'setting_tongji',
+        'type' => 'textarea'
+    ));
+    $wp_customize->add_setting('tang_tongji_position', array(
+        'default' => 'body',
+        'type' => 'option'
+    ));
+    $wp_customize->add_control('tang_tongji_position', array(
+        'label' => '放置位置',
+        'section' => 'setting_tongji',
+        'type' => 'select',
+        'choices' => array(
+            'body' => __( 'body' ),
+            'head' => __( 'head' )
+        )
+    ));
 }
+add_action( 'customize_register', 'jieStyle_customize_register' );
 
-function mytheme_admin() {
-    global $themename, $shortname, $options;
-    if ( isset($_REQUEST['saved']) ) echo '<div id="message" class="updated notice is-dismissible"><p>'.$themename.' 设置已保存。</p></div>';
-?>
-
-<link rel="stylesheet" href="<?php bloginfo('template_directory'); ?>/css/bootstrap.min.css">
-<div class="container-fluid">
-    <h2 class="text-primary"><?php echo $themename; ?> Two <a href="https://tangjie.me/jiestyle-two" target="_blank" data-toggle="tooltip" data-placement="bottom" title="点击查看更新"><span class="badge">v2.5.1</span></a></h2>
-    <hr class="wp-header-end">
-    <hr>
-    <form class="form-horizontal" method="post">
-    <?php foreach ($options as $value) {
-        if ($value['type'] == "text") { ?>
-        <div class="form-group">
-            <label for="options" class="col-sm-2 control-label"><?php echo $value['name']; ?></label>
-            <div class="col-sm-10">
-                <input class="form-control" name="<?php echo $value['id']; ?>" id="<?php echo $value['id']; ?>" type="<?php echo $value['type']; ?>" value="<?php if ( get_settings( $value['id'] ) != "") { echo stripslashes(get_settings( $value['id']) ); } else { echo $value['std']; } ?>" />
-            </div>
-        </div>
-        <?php } elseif ($value['type'] == "textarea") { ?>
-        <div class="form-group">
-            <label for="options" class="col-sm-2 control-label"><?php echo $value['name']; ?></label>
-            <div class="col-sm-10">
-                <textarea class="form-control" rows="3" name="<?php echo $value['id']; ?>" type="<?php echo $value['type']; ?>" ><?php if ( get_settings( $value['id'] ) != "") { echo stripslashes(get_settings( $value['id']) ); } else { echo $value['std']; } ?></textarea>
-            </div>
-        </div>
-        <?php } elseif ($value['type'] == "color") { ?>
-        <div class="form-group">
-            <label for="options" class="col-sm-2 control-label"><?php echo $value['name']; ?></label>
-            <div class="col-sm-3">
-                <input name="<?php echo $value['id']; ?>" class="input-color" type="text"  value="<?php if ( get_settings( $value['id'] ) != "") { echo stripslashes(get_settings( $value['id']) ); } else { echo $value['std']; } ?>" />
-            </div>
-            <div class="col-sm-6">
-                <p class="form-control-static"><?php echo $value['explain']; ?></p>
-            </div>
-        </div>
-        <?php } elseif ($value['type'] == "select") { ?>
-        <div class="form-group">
-            <label for="options" class="col-sm-2 control-label"><?php echo $value['name']; ?></label>
-            <div class="col-sm-2">
-                <select class="form-control" name="<?php echo $value['id']; ?>" id="<?php echo $value['id']; ?>">
-                    <?php foreach ($value['options'] as $option) { ?>
-                    <option value="<?php echo $option;?>" <?php if (get_settings( $value['id'] ) == $option) { echo 'selected="selected"'; } ?>>
-                        <?php
-                        if ((empty($option) || $option == '' ) && isset($value['option'])) {
-                            echo $value['option'];
-                        } else {
-                            echo $option;
-                        }
-                        ?>
-                    </option>
-                    <?php } ?>
-                </select>
-            </div>
-        </div>
-        <?php } elseif ($value['type'] == "hr") { ?>
-        <hr />
-        <?php } ?>
-    <?php } ?>
-    <div class="form-group" style="margin-top:50px;">
-        <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-primary" name="save"> 保存 </button>
-            <input type="hidden" name="action" value="save" />
-        </div>
-    </div>
-    </form>
-</div>
-<script src="<?php bloginfo('template_directory'); ?>/js/jquery.min.js"></script>
-<script src="<?php bloginfo('template_directory'); ?>/js/bootstrap.min.js"></script>
-<script>
-$(function() {
-    $('[data-toggle="tooltip"]').tooltip()
-});
-$(function () {
-    $('[class="input-color"]').wpColorPicker();
-});
-</script>
-<?php
-}
-add_action('admin_menu', 'mytheme_add_admin');
 ?>

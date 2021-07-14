@@ -61,11 +61,7 @@ if ( is_single() ){
 <?php if (function_exists('is_tag')) { if ( is_tag() ) { ?>
 <title><?php single_tag_title("", true); ?> - <?php bloginfo('name'); ?></title>
 <?php } } ?>
-<link rel="apple-touch-icon" href="<?php bloginfo('template_directory'); ?>/images/icon_32.png">
-<link rel="apple-touch-icon" sizes="152x152" href="<?php bloginfo('template_directory'); ?>/images/icon_152.png">
-<link rel="apple-touch-icon" sizes="167x167" href="<?php bloginfo('template_directory'); ?>/images/icon_167.png">
-<link rel="apple-touch-icon" sizes="180x180" href="<?php bloginfo('template_directory'); ?>/images/icon_180.png">
-<link rel="icon" href="<?php bloginfo('template_directory'); ?>/images/icon_32.png" type="image/x-icon">
+<?php wp_site_icon(); ?>
 <link rel="stylesheet" href="<?php bloginfo('template_directory'); ?>/css/bootstrap.min.css">
 <link rel="stylesheet" href="<?php bloginfo('template_directory'); ?>/css/fontawesome.min.css">
 <link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>">
