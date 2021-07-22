@@ -5,7 +5,7 @@ Theme URI: https://tangjie.me/jiestyle-two
 Author: Jarvis Tang
 Author URI: https://tangjie.me/
 Description: A responsible theme for WordPress.
-Version: v2.6
+Version: v2.6.1
 License: GNU General Public License v3.0
 */
 function tangstyle_page_menu_args( $args ) {
@@ -296,11 +296,11 @@ function JieStyle_customize_register( $wp_customize ) {
             '显示' => __( '显示' )
         )
     ));
-    $wp_customize->add_setting('tang_weixin_url', array(
+    $wp_customize->add_setting('tang_weixin_img', array(
         'default' => 'https://tangjie.me/media/wechat/pmtangjie.jpg',
         'type' => 'option'
     ));
-    $wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'tang_weixin_url', array(
+    $wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'tang_weixin_img', array(
         'label' => '公众号二维码图片',
         'section' => 'setting_interactive',
     )));

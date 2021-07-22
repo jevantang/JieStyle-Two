@@ -1,5 +1,8 @@
 # JieStyle Two 更新日志
 
+### v2.6.1 Release 2021-07-22
+* 修复微信公众号图片无法显示问题
+
 ### v2.6 Release 2021-07-15
 * 使用 WordPress 自带的 Theme Customizer 功能实现主题配置，彻底解决兼容性问题。
 
