@@ -4,7 +4,7 @@ Theme URI: https://tangjie.me/jiestyle-two
 Author: Jarvis Tang
 Author URI: https://tangjie.me/
 Description: A responsible theme for WordPress.
-Version: v2.6.1
+Version: v2.6.2
 License: GNU General Public License v3.0
 Tags: black, white, blue, two-columns, right-sidebar
 */
@@ -28,6 +28,11 @@ a {
 a:hover {
     text-decoration: none!important;
     color: #2980b9!important
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    padding: 6px 10px
 }
 
 #header {

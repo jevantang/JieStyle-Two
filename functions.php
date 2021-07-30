@@ -4,8 +4,6 @@ Theme Name: JieStyle Two
 Theme URI: https://tangjie.me/jiestyle-two
 Author: Jarvis Tang
 Author URI: https://tangjie.me/
-Description: A responsible theme for WordPress.
-Version: v2.6.1
 License: GNU General Public License v3.0
 */
 function tangstyle_page_menu_args( $args ) {
