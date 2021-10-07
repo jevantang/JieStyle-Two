@@ -9,7 +9,7 @@
 <footer id="footer">
     <div class="copyright">
         <p><i class="far fa-copyright"></i> <?php echo get_option('tang_years'); ?> <b><?php echo get_option('tang_company'); ?></b></p>
-        <p>Powered by <b>WordPress</b>. Theme by <a href="https://tangjie.me/jiestyle-two" data-toggle="tooltip" data-placement="top" title="WordPress 主题模板" target="_blank"><b>JieStyle Two</b></a> | <?php if (get_option('tang_icp') != '') { ?><a href="https://beian.miit.gov.cn/" target="_blank" rel="nofollow"><?php echo get_option( 'tang_icp' );?></a><?php } ?> <?php if (get_option('tang_beian') != '') { ?><a href="http://www.beian.gov.cn/" target="_blank" rel="nofollow"><?php echo get_option( 'tang_beian' );?></a><?php } ?></p>
+        <p>Powered by <b>WordPress</b>. Theme by <a href="https://tangjie.me/jiestyle-two" data-toggle="tooltip" data-placement="top" title="WordPress 主题模板" target="_blank"><b>JieStyle Two</b></a> | <?php if (get_option('tang_icp') != '') { ?><a href="https://beian.miit.gov.cn/" target="_blank" rel="nofollow"><?php echo get_option('tang_icp'); ?></a><?php } ?> <?php if (get_option('tang_beian') != '') { ?><a href="http://www.beian.gov.cn/" target="_blank" rel="nofollow"><?php echo get_option('tang_beian'); ?></a><?php } ?></p>
     </div>
     <?php if (get_option('tang_tongji_position') == 'body') { ?>
         <div style="display:none;"><?php echo stripslashes(get_option('tang_tongji')); ?></div>
