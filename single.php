@@ -1,7 +1,6 @@
 <?php get_header(); ?>
 <div id="main">
-<?php while (have_posts()) {
-    the_post(); ?>
+<?php while ( have_posts() ) : the_post(); ?>
     <article class="col-md-8 col-md-offset-2 view clearfix">
         <h1 class="view-title"><?php the_title(); ?></h1>
         <div class="view-meta">
@@ -14,7 +13,7 @@
 <?php the_content(); ?>
         </div>
         <section class="view-tag">
-            <div class="pull-left"><i class="fas fa-tags"></i> <?php the_tags('', ''); ?></div>
+            <div class="pull-left"><i class="fas fa-tags"></i> <?php the_tags('',''); ?></div>
         </section>
         <?php if (get_option('tang_dashang') == '启用') { ?>
         <section class="support-author">
@@ -26,8 +25,7 @@
             <?php comments_template(); ?>
         </section>
     </article>
-<?php
-} ?>
+<?php endwhile; ?>
     <section class="col-md-8 col-md-offset-2 clearfix">
     <div class="read">
         <div class="read-head"><i class="fas fa-book"></i> 更多阅读</div>
@@ -39,9 +37,9 @@
             </div>
             <div class="col-md-6">
                 <ul>
-                <?php $rand_posts = get_posts('numberposts=10&orderby=rand'); foreach ($rand_posts as $post) { ?>
+                <?php $rand_posts = get_posts('numberposts=10&orderby=rand');  foreach( $rand_posts as $post ) : ?>
                     <li><a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a></li>
-                <?php } ?>
+                <?php endforeach; ?>
                 </ul>
             </div>
         </div>
@@ -49,7 +47,7 @@
     <div class="read">
         <div class="read-head"><i class="fas fa-tags"></i> 标签云</div>
         <div class="read-list">
-            <?php wp_tag_cloud(); ?>
+            <?php wp_tag_cloud();?>
         </div>
     </div>
     </section>

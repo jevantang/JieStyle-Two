@@ -11,7 +11,7 @@ WordPress Themes
 * 跨浏览器兼容，支持 IE、Edge、Chrome、Safari、Opera
 * 响应式Web设计，自适应电脑、平板电脑、移动设备
 * 采用前端开发框架 Bootstrap v3.4.1
-* 采用图标字体库 Font Awesome v5.15.3
+* 采用图标字体库 Font Awesome v5.15.4
 * 支持主题控制面板，后台方便的设置 SEO、统计代码
 * 针对 SEO 进行改良，支持内页自动获取关键字、描述，支持自动推送到百度
 * 支持 WordPress 的菜单系统，无限级下拉菜单（支持菜单鼠标悬停下拉功能）
