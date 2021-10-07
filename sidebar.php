@@ -21,15 +21,15 @@
 <aside class="widget clearfix">
     <h4 class="widget-title">随机推荐</h4>
     <ul class="widget-hot">
-    <?php $rand_posts = get_posts('numberposts=10&orderby=rand'); foreach( $rand_posts as $post ) : ?>
+    <?php $rand_posts = get_posts('numberposts=10&orderby=rand'); foreach ($rand_posts as $post) { ?>
         <li><a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a></li>
-    <?php endforeach; ?>
+    <?php } ?>
     </ul>
 </aside>
 <aside class="widget clearfix">
     <h4 class="widget-title">标签云</h4>
     <div class="widget-tags">
-        <?php wp_tag_cloud();?>
+        <?php wp_tag_cloud(); ?>
     </div>
 </aside>
 <?php if (is_home() || is_front_page()) { ?>
