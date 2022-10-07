@@ -81,7 +81,7 @@ function my_css_attributes_filter($var) {
 
 //替换 Gravatar 服务器
 function replace_gravatar($avatar) {
-    $avatar = str_replace(array("//gravatar.com/", "//secure.gravatar.com/", "//www.gravatar.com/", "//0.gravatar.com/", "//1.gravatar.com/", "//2.gravatar.com/", "//cn.gravatar.com/"), "//sdn.geekzu.org/", $avatar);
+    $avatar = str_replace(array("//gravatar.com/", "//secure.gravatar.com/", "//www.gravatar.com/", "//0.gravatar.com/", "//1.gravatar.com/", "//2.gravatar.com/", "//cn.gravatar.com/"), "//dn-qiniu-avatar.qbox.me/", $avatar);
     return $avatar;
 }
 add_filter( 'get_avatar', 'replace_gravatar' );
