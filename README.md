@@ -17,7 +17,7 @@ WordPress Themes
 * 支持 WordPress 的菜单系统，无限级下拉菜单（支持菜单鼠标悬停下拉功能）
 * 支持无限嵌套评论
 * 支持 Gravatar 头像显示，替换成了中国境内镜像地址
-* 支持 WordPress 4.x 和 5.x 版本
+* 支持 WordPress 4.x, 5.x, 6.x 版本
 * 支持 PHP 7.x 和 8.x 运行环境
 
 ## 版本信息
